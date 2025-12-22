@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf3774e06edb2b0f9d257b4e4b5d5be, type: 3}
+  m_Name: WhiteColor
+  m_EditorClassIdentifier: Assembly-CSharp::RewardColor
+  rewardName: WhiteColor
+  newMaterial: {fileID: 2100000, guid: cfd668ed093952e658ff8e9fe3a74b9f, type: 2}
