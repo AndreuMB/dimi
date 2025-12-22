@@ -7,7 +7,6 @@ public class RewardObject : RewardEffect
 
     public override void Give(CharacterController player)
     {
-        Debug.Log("Run object reward " + rewardObjectName);
         player.EnableObjectReward(rewardObjectName);
     } 
 }

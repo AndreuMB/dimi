@@ -9,7 +9,6 @@ public class RewardColor : RewardEffect
 
     public override void Give(CharacterController player)
     {
-        // Debug.Log("Run sppecific reward" + rewardName);
         player.SetNewMaterial(newMaterial);
     } 
 }

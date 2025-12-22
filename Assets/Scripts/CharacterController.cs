@@ -20,16 +20,23 @@ public class CharacterController : MonoBehaviour
 	[SerializeField] private CinemachineBrain cinemachineBrain;
 	[SerializeField] private CinemachineCamera digitalCameraMain;
 	[SerializeField] private CinemachineCamera digitalCameraPlayer;
+	[SerializeField] private CinemachineCamera digitalCameraPlayerRythm;
 	private float defaultZoom = 20;
 	private float maxZoom = 5;
 	private float speedZoom = 0.5f;
 
+	private bool transition = false;
+
 	private GameObject interactableGO = null;
 	[SerializeField] private SkinnedMeshRenderer model;
+	[SerializeField] private GameObject rythmMapPlayerSpawn;
+	[SerializeField] private GameObject rythmUI;
+	private Transform lastTransformPlayerMap;
 
 	[Header("Accessories GO")]
 	[SerializeField] public GameObject headbandRewardGO;
 	[SerializeField] public GameObject wingsRewardGO;
+
 
 	
 
@@ -42,6 +49,7 @@ public class CharacterController : MonoBehaviour
 		animator = GetComponent<Animator>();
 		animatorWings = wingsRewardGO.GetComponent<Animator>();
 		digitalCameraPlayer.gameObject.SetActive(true);
+		rythmUI.gameObject.SetActive(false);
 		HideAccessories();
     }
 
@@ -52,6 +60,8 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
 	{
+		if(transition) return;
+
 		Vector3 moveDir = new (input.x, 0f, input.y);
 
 		bool isMoving = moveDir != Vector3.zero;
@@ -78,9 +88,8 @@ public class CharacterController : MonoBehaviour
     {
 		if (callbackContext.performed)
 		{
-			StartCoroutine(JumpCoroutine());
+			if (wingsRewardGO.activeInHierarchy) StartCoroutine(JumpCoroutine());
 		}
-		Debug.Log("Jump" + callbackContext.phase);
     }
 
 	private IEnumerator JumpCoroutine()
@@ -101,7 +110,7 @@ public class CharacterController : MonoBehaviour
 	private void HideAccessories()
 	{
 		headbandRewardGO.gameObject.SetActive(false);
-		// wingsRewardGO.gameObject.SetActive(false);
+		wingsRewardGO.gameObject.SetActive(false);
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -110,8 +119,6 @@ public class CharacterController : MonoBehaviour
 		
 		interactableClose = true;
 		interactableGO = other.gameObject;
-
-        Debug.Log("Trigger enter = " + other.gameObject.name);
     }
 
 	private void OnTriggerExit(Collider other)
@@ -120,8 +127,6 @@ public class CharacterController : MonoBehaviour
 
 		interactableClose = false;
 		interactableGO = null;
-
-        Debug.Log("Trigger exit = " + other.gameObject.name);
     }
 
 	public void Interact(InputAction.CallbackContext callbackContext)
@@ -129,35 +134,13 @@ public class CharacterController : MonoBehaviour
 		if (!callbackContext.performed) return;
 		if (interactableClose)
 		{
+			transition = true;
 			// digitalCamera.gameObject.SetActive(true);
-			Debug.Log("interactable = " + interactableGO);
 			// interactable.SetActive(false);
 			StartCoroutine(CameraBlendCoroutine());
-			
+			transition = false;
 		}
 	}
-
-	// private void RunInteractionWhiteDemon()
-	// {
-	// 	Interactable interactableScript = interactable.GetComponent<Interactable>();
-
-	// 	switch (interactableScript.rewardNumber)
-	// 	{
-	// 		case Rewards.WhiteMaterial:
-	// 			Material whiteMaterial = interactableScript.GetInteractableWhiteColor();
-	// 			model.material = whiteMaterial;
-	// 			break;
-
-	// 		case Rewards.Headband:
-	// 			headbandRewardGO.SetActive(true);
-	// 			break;
-			
-	// 		default:
-	// 			Debug.Log("Reward not exists");
-	// 			break;
-	// 	}
-		
-	// }
 
 	private void RunInteraction()
 	{
@@ -195,6 +178,7 @@ public class CharacterController : MonoBehaviour
 		digitalCameraPlayer.Lens.FieldOfView = defaultZoom;
 		digitalCameraMain.Priority = 1;
 		digitalCameraPlayer.Priority = 0;
+		digitalCameraPlayerRythm.Priority = 0;
 	}
 
 	// private void ZoomIn()
@@ -220,6 +204,18 @@ public class CharacterController : MonoBehaviour
 		// RunInteractionWhiteDemon();
 		RunInteraction();
 		yield return new WaitForSeconds(2);
-		DefaultCameraView();
+		RythmGameLoad();
+		// DefaultCameraView();
     }
+
+	void RythmGameLoad()
+	{
+		lastTransformPlayerMap = transform;
+		transform.position = rythmMapPlayerSpawn.transform.position;
+		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+		digitalCameraPlayerRythm.Priority = 1;
+		digitalCameraMain.Priority = 0;
+		digitalCameraPlayer.Priority = 0;
+		rythmUI.SetActive(true);
+	}
 }

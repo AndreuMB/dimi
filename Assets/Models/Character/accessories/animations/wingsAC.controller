@@ -135,8 +135,8 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: wings_fly
-  m_Speed: 1
-  m_CycleOffset: 0
+  m_Speed: 10
+  m_CycleOffset: 1
   m_Transitions:
   - {fileID: -610360224450394836}
   m_StateMachineBehaviours: []

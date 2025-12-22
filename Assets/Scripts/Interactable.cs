@@ -16,7 +16,6 @@ public class Interactable : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter = " + other.gameObject.name);
         
 		if (other.gameObject.tag != "Player") return;
 		
@@ -28,7 +27,6 @@ public class Interactable : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger exit = " + other.gameObject.name);
 
 		if (other.gameObject.tag != "Player") return;
 
