@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RewardColor", menuName = "RewardsSO/RewardColor")]
+[CreateAssetMenu(fileName = "RewardColor", menuName = "Scriptable Objects/RewardsSO/RewardColor")]
 public class RewardColor : RewardEffect
 {
     // public string rewardName;

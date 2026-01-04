@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RewardObject", menuName = "RewardsSO/RewardObject")]
+[CreateAssetMenu(fileName = "RewardObject", menuName = "Scriptable Objects/RewardsSO/RewardObject")]
 public class RewardObject : RewardEffect
 {
     public RewardObjectName rewardObjectName;

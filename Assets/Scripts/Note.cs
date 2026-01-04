@@ -1,9 +1,12 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Note : MonoBehaviour
 {
-    public float speed = 0.5f;
-    public float limit = 500;
+    private float speed = 0.5f;
+    private float limit = 500;
+    public int stringNum;
+    public float duration;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,4 +23,23 @@ public class Note : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+
+    public void SetLimit(float newLimit)
+    {
+        limit = newLimit;
+    }
+}
+
+
+
+[System.Serializable]
+public class NoteData
+{
+    public int stringNum;
+    public float secondToPlay;
 }
