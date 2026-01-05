@@ -16,12 +16,22 @@ MonoBehaviour:
   songDurationSeconds: 60
   notes:
   - stringNum: 1
-    secondToPlay: 1
-  - stringNum: 1
-    secondToPlay: 4
-  - stringNum: 1
+    secondToSpawn: 1
     secondToPlay: 5
+    spawned: 0
+  - stringNum: 1
+    secondToSpawn: 4
+    secondToPlay: 8
+    spawned: 0
+  - stringNum: 1
+    secondToSpawn: 5
+    secondToPlay: 9
+    spawned: 0
   - stringNum: 2
-    secondToPlay: 7
+    secondToSpawn: 7
+    secondToPlay: 11
+    spawned: 0
   - stringNum: 3
-    secondToPlay: 10
+    secondToSpawn: 10
+    secondToPlay: 14
+    spawned: 0

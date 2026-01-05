@@ -5,10 +5,10 @@ public class RewardObject : RewardEffect
 {
     public RewardObjectName rewardObjectName;
 
-    public override void Give(CharacterController player)
+    public override void Give(Player player)
     {
         player.EnableObjectReward(rewardObjectName);
-    } 
+    }
 }
 
 public enum RewardObjectName

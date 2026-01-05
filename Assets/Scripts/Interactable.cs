@@ -2,38 +2,38 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-	[SerializeField] private GameObject buttonHint;
-	[SerializeField] private Material whiteMaterial;
-	[SerializeField] public Rewards rewardNumber;
+    [SerializeField] private GameObject buttonHint;
+    [SerializeField] private Material whiteMaterial;
+    [SerializeField] public Rewards rewardNumber;
     [SerializeField] private RewardEffect effect;
 
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         buttonHint.SetActive(false);
     }
 
-	private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        
-		if (other.gameObject.tag != "Player") return;
-		
+
+        if (other.gameObject.tag != "Player") return;
+
         buttonHint.SetActive(true);
-		// interactableClose = true;
-		// interactable = other.gameObject;
+        // interactableClose = true;
+        // interactable = other.gameObject;
 
     }
 
-	private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
 
-		if (other.gameObject.tag != "Player") return;
+        if (other.gameObject.tag != "Player") return;
 
         buttonHint.SetActive(false);
 
-		// interactableClose = false;
-		// interactable = null;
+        // interactableClose = false;
+        // interactable = null;
 
     }
 
@@ -47,7 +47,7 @@ public class Interactable : MonoBehaviour
         return true;
     }
 
-    public void Interact(CharacterController characterController)
+    public void Interact(Player characterController)
     {
         effect.Give(characterController);
     }

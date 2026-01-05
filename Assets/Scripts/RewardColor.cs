@@ -7,8 +7,8 @@ public class RewardColor : RewardEffect
     [SerializeField] private Material newMaterial;
 
 
-    public override void Give(CharacterController player)
+    public override void Give(Player player)
     {
         player.SetNewMaterial(newMaterial);
-    } 
+    }
 }

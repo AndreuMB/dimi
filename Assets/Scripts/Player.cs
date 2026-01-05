@@ -1,12 +1,11 @@
 using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class CharacterController : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
-    // public float speed = 20f;
+	// public float speed = 20f;
 	// private float upForce = 200f, force = 15f;
 
 	private Rigidbody rb;
@@ -38,12 +37,12 @@ public class CharacterController : MonoBehaviour
 	[SerializeField] public GameObject wingsRewardGO;
 
 
-	
 
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+
+
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
+	{
 		rb = GetComponent<Rigidbody>();
 		playerInput = GetComponent<PlayerInput>();
 		animator = GetComponent<Animator>();
@@ -51,18 +50,18 @@ public class CharacterController : MonoBehaviour
 		digitalCameraPlayer.gameObject.SetActive(true);
 		// rythmUI.gameObject.SetActive(false);
 		HideAccessories();
-    }
+	}
 
-	void Update ()
+	void Update()
 	{
 		input = playerInput.actions["Move"].ReadValue<Vector2>();
 	}
 
-    void FixedUpdate()
+	void FixedUpdate()
 	{
-		if(transition) return;
+		if (transition) return;
 
-		Vector3 moveDir = new (input.x, 0f, input.y);
+		Vector3 moveDir = new(input.x, 0f, input.y);
 
 		bool isMoving = moveDir != Vector3.zero;
 		animator.SetBool("isWalking", isMoving);
@@ -81,16 +80,16 @@ public class CharacterController : MonoBehaviour
 			Quaternion smooth = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 			rb.MoveRotation(smooth);
 		}
-		
+
 	}
 
-    public void Jump(InputAction.CallbackContext callbackContext)
-    {
+	public void Jump(InputAction.CallbackContext callbackContext)
+	{
 		if (callbackContext.performed)
 		{
 			if (wingsRewardGO.activeInHierarchy) StartCoroutine(JumpCoroutine());
 		}
-    }
+	}
 
 	private IEnumerator JumpCoroutine()
 	{
@@ -100,12 +99,12 @@ public class CharacterController : MonoBehaviour
 	}
 
 	public void Emote1(InputAction.CallbackContext callbackContext)
-    {
+	{
 		if (callbackContext.performed)
 		{
 			animator.SetTrigger("hello");
 		}
-    }
+	}
 
 	private void HideAccessories()
 	{
@@ -114,20 +113,20 @@ public class CharacterController : MonoBehaviour
 	}
 
 	private void OnTriggerEnter(Collider other)
-    {
+	{
 		if (other.gameObject.tag != "Interactable") return;
-		
+
 		interactableClose = true;
 		interactableGO = other.gameObject;
-    }
+	}
 
 	private void OnTriggerExit(Collider other)
-    {
+	{
 		if (other.gameObject.tag != "Interactable") return;
 
 		interactableClose = false;
 		interactableGO = null;
-    }
+	}
 
 	public void Interact(InputAction.CallbackContext callbackContext)
 	{
@@ -159,10 +158,10 @@ public class CharacterController : MonoBehaviour
 		{
 			case RewardObjectName.headband:
 				headbandRewardGO.SetActive(true);
-			break;
+				break;
 			case RewardObjectName.wings:
 				wingsRewardGO.SetActive(true);
-			break;
+				break;
 		}
 	}
 
@@ -187,26 +186,28 @@ public class CharacterController : MonoBehaviour
 	// }
 
 	IEnumerator CameraBlendCoroutine()
-    {
+	{
 		digitalCameraMain.Priority = 0;
 		digitalCameraPlayer.Priority = 1;
 		// wait to start the blending
 		yield return null;
-        while (cinemachineBrain.IsBlending) { 
-			yield return null; 
+		while (cinemachineBrain.IsBlending)
+		{
+			yield return null;
 		}
 		yield return new WaitForSeconds(0.5f);
 
-		while (digitalCameraPlayer.Lens.FieldOfView > maxZoom) { 
+		while (digitalCameraPlayer.Lens.FieldOfView > maxZoom)
+		{
 			digitalCameraPlayer.Lens.FieldOfView -= speedZoom;
-			yield return null; 
+			yield return null;
 		}
 		// RunInteractionWhiteDemon();
 		RunInteraction();
 		yield return new WaitForSeconds(2);
 		RythmGameLoad();
 		// DefaultCameraView();
-    }
+	}
 
 	void RythmGameLoad()
 	{
