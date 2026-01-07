@@ -29,17 +29,6 @@ public class Note : MonoBehaviour
         }
     }
 
-    // Update is called once per fram
-    // void FixedUpdate()
-    // {
-    //     transform.position += new Vector3(0,-speed,0);
-    //     float yRectPosition = GetComponent<RectTransform>().localPosition.y;
-    //     if (yRectPosition<-limit)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
-
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;

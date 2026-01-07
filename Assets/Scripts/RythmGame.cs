@@ -7,7 +7,9 @@ using UnityEngine.InputSystem;
 
 public class RythmGame : MonoBehaviour
 {
+    // Bass strings spawn gameobject
     [SerializeField] private GameObject noteSpawnsGO;
+    // Bass strings spawn gameobject list
     private List<GameObject> noteSpawns = new();
     [SerializeField] private GameObject notePrefab;
     // [SerializeField] private float speed;
@@ -16,13 +18,16 @@ public class RythmGame : MonoBehaviour
     [SerializeField] private int limit;
     [SerializeField] private List<SongSO> songs;
     private float timer = 0;
-    [SerializeField] private TMP_Text timerGO;
+    [SerializeField] private TMP_Text timerTMP;
     private SongSO currentSong;
     private NoteData currentNote;
+    private List<GameObject> notesGOList = new();
     [SerializeField] GameObject triggerString;
     int noteIndexToSpawn = 0;
     int noteIndexToPlay = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    int score = 0;
+    [SerializeField] private TMP_Text scoreTMP;
+
     void Start()
     {
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
@@ -35,6 +40,7 @@ public class RythmGame : MonoBehaviour
     void OnEnable()
     {
         timer = 0;
+        score = 0;
         noteIndexToPlay = 0;
         currentSong = songs[0];
         StartCoroutine(TimerCount(currentSong));
@@ -45,9 +51,9 @@ public class RythmGame : MonoBehaviour
         GameObject noteGO = Instantiate(notePrefab, noteSpawns[noteString - 1].transform);
         Note note = noteGO.GetComponent<Note>();
         note.triggerStringPosition = triggerString.transform.position;
-        // note.SetSpeed(speed);
         note.SetSecondsToReachTarget(secondsNoteToString);
         note.SetLimit(limit);
+        notesGOList.Add(noteGO);
     }
 
     IEnumerator TimerCount(SongSO song)
@@ -57,7 +63,7 @@ public class RythmGame : MonoBehaviour
         while (song.songDurationSeconds > timer)
         {
             yield return new WaitForSeconds(step);
-            timerGO.text = timer.ToString();
+            timerTMP.text = timer.ToString();
             timer += step;
             CheckForNote(song);
             if (currentNote == null) currentNote = currentSong.notes[noteIndexToPlay];
@@ -79,16 +85,6 @@ public class RythmGame : MonoBehaviour
 
     void CheckForNote(SongSO song)
     {
-        // NoteData note = song.notes.FirstOrDefault(note =>
-        // {
-        //     if (note.secondToSpawn >= timer && !note.spawned)
-        //     {
-        //         note.spawned = true;
-        //         return true;
-        //     }
-        //     return false;
-        // }
-        // );
         if (noteIndexToSpawn >= currentSong.notes.Length) return;
         NoteData note = song.notes[noteIndexToSpawn];
         if (note.secondToSpawn <= timer)
@@ -106,18 +102,9 @@ public class RythmGame : MonoBehaviour
         if (currentNote == null) return;
         if (!callbackContext.performed) return;
 
-
         if (callbackContext.control.displayName == currentNote.stringNum.ToString())
         {
-            Debug.Log("timer = " + timer);
-            Debug.Log("secondToPlay = " + currentNote.secondToPlay);
             ScoreSystem();
-            // if (timer == currentNote.secondToPlay)
-            // {
-            //     Debug.Log("perfect!!!");
-            //     return;
-            // }
-
         }
 
     }
@@ -126,21 +113,36 @@ public class RythmGame : MonoBehaviour
     {
         float accuracy = currentNote.secondToPlay - timer;
         Debug.Log("accuracy = " + accuracy);
-        if (accuracy > 1)
+        if (accuracy > 0.6)
         {
+            // above 0.6 doesnt destroy note
             Debug.Log("Bad");
+            return;
         }
-        else if (accuracy > 0.5)
+        else if (accuracy > 0.4)
         {
             Debug.Log("Meh");
+            score += 25;
         }
-        else if (accuracy > 0.2)
+        else if (accuracy > 0.3)
         {
-            Debug.Log("Good");
+            score += 50;
+            Debug.Log("Nice");
+        }
+        else if (accuracy > 0.15)
+        {
+            score += 75;
+            Debug.Log("Good!");
         }
         else
         {
+            score += 100;
             Debug.Log("Perfect!");
         }
+
+        scoreTMP.text = score.ToString();
+
+        if (notesGOList.Count > noteIndexToPlay) Destroy(notesGOList[noteIndexToPlay]);
+
     }
 }
