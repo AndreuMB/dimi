@@ -567,8 +567,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: -10, y: 10, z: -10}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 40, y: 5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2336,6 +2336,7 @@ MonoBehaviour:
   timerTMP: {fileID: 1954529375}
   triggerString: {fileID: 1669988072}
   scoreTMP: {fileID: 1909031365}
+  keysContainer: {fileID: 1000733231}
 --- !u!114 &1309308548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3995,6 +3996,18 @@ PrefabInstance:
     - target: {fileID: 3356875225350018896, guid: a568432a8a10a6da99e727fa789de623, type: 3}
       propertyPath: m_Name
       value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5246093328185291715, guid: a568432a8a10a6da99e727fa789de623, type: 3}
       propertyPath: m_Pivot.x

@@ -48,7 +48,7 @@
                     "name": "",
                     "id": "100af4d2-ecda-428f-863c-6f9153c49f1d",
                     "path": "<Keyboard>/1",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Key1",

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SongSO : ScriptableObject
 {
     public string songName;
-    public int songDurationSeconds;
+    // public int songDurationSeconds;
     public NoteData[] notes;
+    public int scoreToPass;
 }

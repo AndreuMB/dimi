@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		animatorWings = wingsRewardGO.GetComponent<Animator>();
 		digitalCameraPlayer.gameObject.SetActive(true);
+		// comment for test
 		// rythmUI.gameObject.SetActive(false);
 		HideAccessories();
 	}

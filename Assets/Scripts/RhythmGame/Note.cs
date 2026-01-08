@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Note : MonoBehaviour
@@ -12,6 +13,9 @@ public class Note : MonoBehaviour
     Vector3 startPosition;
     Vector3 targetPosition;
     public Vector3 triggerStringPosition;
+    [SerializeField] Color keyDefaultColor;
+    [SerializeField] Color keyPressColor;
+    [SerializeField] Image insideKeyImg;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,6 +46,16 @@ public class Note : MonoBehaviour
     public void SetLimit(float newLimit)
     {
         limit = newLimit;
+    }
+
+    public void KeyPress()
+    {
+        insideKeyImg.color = keyPressColor;
+    }
+
+    public void KeyRelease()
+    {
+        insideKeyImg.color = keyDefaultColor;
     }
 }
 

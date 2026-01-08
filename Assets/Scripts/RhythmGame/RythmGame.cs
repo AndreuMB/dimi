@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +26,8 @@ public class RythmGame : MonoBehaviour
     int noteIndexToPlay = 0;
     int score = 0;
     [SerializeField] private TMP_Text scoreTMP;
+    [SerializeField] private GameObject keysContainer;
+    private List<GameObject> keysList = new();
 
     void Start()
     {
@@ -34,7 +35,11 @@ public class RythmGame : MonoBehaviour
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
         }
-        // StartCoroutine(PlaySong(currentSong));
+
+        for (int i = 0; i < keysContainer.transform.childCount; i++)
+        {
+            keysList.Add(keysContainer.transform.GetChild(i).gameObject);
+        }
     }
 
     void OnEnable()
@@ -59,28 +64,35 @@ public class RythmGame : MonoBehaviour
     IEnumerator TimerCount(SongSO song)
     {
         float step = 0.1f;
-
-        while (song.songDurationSeconds > timer)
+        bool notesLeft = true;
+        // while (song.songDurationSeconds > timer)
+        while (notesLeft)
         {
             yield return new WaitForSeconds(step);
-            timerTMP.text = timer.ToString();
+            timerTMP.text = TimerToMinutes();
             timer += step;
             CheckForNote(song);
             if (currentNote == null) currentNote = currentSong.notes[noteIndexToPlay];
             if (timer > currentNote.secondToPlay)
             {
-                noteIndexToPlay++;
-                if (noteIndexToPlay < currentSong.notes.Length)
-                {
-                    currentNote = currentSong.notes[noteIndexToPlay];
-                }
-                else
-                {
-                    Debug.Log("No more notes");
-                    yield break;
-                }
+                if (!NextNote()) notesLeft = false;
             }
         }
+    }
+
+    bool NextNote()
+    {
+        noteIndexToPlay++;
+        if (noteIndexToPlay < currentSong.notes.Length)
+        {
+            currentNote = currentSong.notes[noteIndexToPlay];
+        }
+        else
+        {
+            Debug.Log("No more notes");
+            return false;
+        }
+        return true;
     }
 
     void CheckForNote(SongSO song)
@@ -100,7 +112,26 @@ public class RythmGame : MonoBehaviour
     public void HandlePlayerInput(InputAction.CallbackContext callbackContext)
     {
         if (currentNote == null) return;
+
+        int keyNum = 0;
+
+        if (callbackContext.canceled)
+        {
+            if (int.TryParse(callbackContext.control.displayName, out keyNum))
+            {
+                // was successful key exist
+                keysList[keyNum - 1].GetComponent<Key>().KeyRelease();
+            }
+        }
+
         if (!callbackContext.performed) return;
+
+        if (int.TryParse(callbackContext.control.displayName, out keyNum))
+        {
+            // was successful key exist
+            keysList[keyNum - 1].GetComponent<Key>().KeyPress();
+        }
+
 
         if (callbackContext.control.displayName == currentNote.stringNum.ToString())
         {
@@ -143,6 +174,16 @@ public class RythmGame : MonoBehaviour
         scoreTMP.text = score.ToString();
 
         if (notesGOList.Count > noteIndexToPlay) Destroy(notesGOList[noteIndexToPlay]);
-
+        NextNote();
     }
+
+    string TimerToMinutes()
+    {
+        int minutes = Mathf.FloorToInt(timer / 60f);
+        int seconds = Mathf.FloorToInt(timer - minutes * 60);
+
+        string timeFormat = string.Format("{0:0}:{1:00}", minutes, seconds);
+        return timeFormat;
+    }
+
 }
