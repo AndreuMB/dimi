@@ -29,12 +29,13 @@ public class Player : MonoBehaviour
 	private GameObject interactableGO = null;
 	[SerializeField] private SkinnedMeshRenderer model;
 	[SerializeField] private GameObject rythmMapPlayerSpawn;
-	[SerializeField] private GameObject rythmUI;
-	private Transform lastTransformPlayerMap;
+	[SerializeField] private GameObject rythmMap;
 
 	[Header("Accessories GO")]
 	[SerializeField] public GameObject headbandRewardGO;
 	[SerializeField] public GameObject wingsRewardGO;
+	private Vector3 lastPositionPlayerMap;
+	private Quaternion lastRotationPlayerMap;
 
 
 
@@ -48,9 +49,13 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		animatorWings = wingsRewardGO.GetComponent<Animator>();
 		digitalCameraPlayer.gameObject.SetActive(true);
-		// comment for test
-		// rythmUI.gameObject.SetActive(false);
 		HideAccessories();
+
+		// comment for test
+		rythmMap.gameObject.SetActive(false);
+		// rythmMap.GetComponent<RythmGame>().StartSong();
+		// playerInput.SwitchCurrentActionMap("RhythmGame");
+		RythmGameLoad();
 	}
 
 	void Update()
@@ -212,12 +217,25 @@ public class Player : MonoBehaviour
 
 	void RythmGameLoad()
 	{
-		lastTransformPlayerMap = transform;
+		rythmMap.SetActive(true);
+		// rythmMap.GetComponent<RythmGame>().SetLastTransformPlayerMap(transform);
+		lastPositionPlayerMap = transform.position;
+		lastRotationPlayerMap = transform.rotation;
+
 		transform.position = rythmMapPlayerSpawn.transform.position;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 		digitalCameraPlayerRythm.Priority = 1;
 		digitalCameraMain.Priority = 0;
 		digitalCameraPlayer.Priority = 0;
-		rythmUI.SetActive(true);
+		playerInput.SwitchCurrentActionMap("RhythmGame");
+		rythmMap.GetComponent<RythmGame>().StartSong();
+	}
+
+	public void ReturnPlayer()
+	{
+		transform.position = lastPositionPlayerMap;
+		transform.rotation = lastRotationPlayerMap;
+		rythmMap.SetActive(false);
+		DefaultCameraView();
 	}
 }

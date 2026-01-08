@@ -28,9 +28,15 @@ public class RythmGame : MonoBehaviour
     [SerializeField] private TMP_Text scoreTMP;
     [SerializeField] private GameObject keysContainer;
     private List<GameObject> keysList = new();
+    public GameObject scoreScreen;
+    public GameObject player;
+    private Transform lastTransformPlayerMap;
+
+
 
     void Start()
     {
+        scoreScreen.SetActive(false);
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
@@ -42,12 +48,13 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    public void StartSong()
     {
+        scoreScreen.SetActive(false);
         timer = 0;
         score = 0;
         noteIndexToPlay = 0;
-        currentSong = songs[0];
+        currentSong = songs[1];
         StartCoroutine(TimerCount(currentSong));
     }
 
@@ -78,6 +85,8 @@ public class RythmGame : MonoBehaviour
                 if (!NextNote()) notesLeft = false;
             }
         }
+
+        FinishSong();
     }
 
     bool NextNote()
@@ -124,19 +133,21 @@ public class RythmGame : MonoBehaviour
             }
         }
 
-        if (!callbackContext.performed) return;
-
-        if (int.TryParse(callbackContext.control.displayName, out keyNum))
+        if (callbackContext.started)
         {
-            // was successful key exist
-            keysList[keyNum - 1].GetComponent<Key>().KeyPress();
+            if (int.TryParse(callbackContext.control.displayName, out keyNum))
+            {
+                // was successful key exist
+                keysList[keyNum - 1].GetComponent<Key>().KeyPress();
+            }
+
+
+            if (callbackContext.control.displayName == currentNote.stringNum.ToString())
+            {
+                ScoreSystem();
+            }
         }
 
-
-        if (callbackContext.control.displayName == currentNote.stringNum.ToString())
-        {
-            ScoreSystem();
-        }
 
     }
 
@@ -185,5 +196,35 @@ public class RythmGame : MonoBehaviour
         string timeFormat = string.Format("{0:0}:{1:00}", minutes, seconds);
         return timeFormat;
     }
+
+    void FinishSong()
+    {
+        scoreScreen.SetActive(true);
+        scoreScreen.GetComponent<ScoreScreen>().SetScore(score + "");
+        if (score >= currentSong.scoreToPass)
+        {
+            Debug.Log("pass song");
+        }
+        else
+        {
+            Debug.Log("Try Again");
+            scoreScreen.GetComponent<ScoreScreen>().ShowSubText();
+
+        }
+
+    }
+
+    public void ExitSong()
+    {
+        player.GetComponent<Player>().ReturnPlayer();
+        // player.transform.position = lastTransformPlayerMap.position;
+        // player.transform.rotation = lastTransformPlayerMap.rotation;
+        // gameObject.SetActive(false);
+    }
+
+    // public void SetLastTransformPlayerMap(Transform transformPlayer)
+    // {
+    //     lastTransformPlayerMap = transformPlayer;
+    // }
 
 }
