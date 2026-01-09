@@ -36,7 +36,7 @@ public class RythmGame : MonoBehaviour
 
     void Start()
     {
-        scoreScreen.SetActive(false);
+        // scoreScreen.SetActive(false);
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
@@ -54,6 +54,7 @@ public class RythmGame : MonoBehaviour
         timer = 0;
         score = 0;
         noteIndexToPlay = 0;
+        noteIndexToSpawn = 0;
         currentSong = songs[1];
         StartCoroutine(TimerCount(currentSong));
     }
@@ -98,7 +99,6 @@ public class RythmGame : MonoBehaviour
         }
         else
         {
-            Debug.Log("No more notes");
             return false;
         }
         return true;
@@ -184,7 +184,7 @@ public class RythmGame : MonoBehaviour
 
         scoreTMP.text = score.ToString();
 
-        if (notesGOList.Count > noteIndexToPlay) Destroy(notesGOList[noteIndexToPlay]);
+        if (notesGOList.Count > noteIndexToPlay) DestroyImmediate(notesGOList[noteIndexToPlay]);
         NextNote();
     }
 
@@ -217,14 +217,6 @@ public class RythmGame : MonoBehaviour
     public void ExitSong()
     {
         player.GetComponent<Player>().ReturnPlayer();
-        // player.transform.position = lastTransformPlayerMap.position;
-        // player.transform.rotation = lastTransformPlayerMap.rotation;
-        // gameObject.SetActive(false);
     }
-
-    // public void SetLastTransformPlayerMap(Transform transformPlayer)
-    // {
-    //     lastTransformPlayerMap = transformPlayer;
-    // }
 
 }

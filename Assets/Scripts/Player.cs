@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
 
 	private bool transition = false;
 
-	private GameObject interactableGO = null;
+	private GameObject interactableTouchGO = null;
+	private Interactable interactableSave;
 	[SerializeField] private SkinnedMeshRenderer model;
 	[SerializeField] private GameObject rythmMapPlayerSpawn;
 	[SerializeField] private GameObject rythmMap;
@@ -55,7 +56,8 @@ public class Player : MonoBehaviour
 		rythmMap.gameObject.SetActive(false);
 		// rythmMap.GetComponent<RythmGame>().StartSong();
 		// playerInput.SwitchCurrentActionMap("RhythmGame");
-		RythmGameLoad();
+		// RythmGameLoad();
+		// StartCoroutine(CameraBlendCoroutine());
 	}
 
 	void Update()
@@ -123,7 +125,7 @@ public class Player : MonoBehaviour
 		if (other.gameObject.tag != "Interactable") return;
 
 		interactableClose = true;
-		interactableGO = other.gameObject;
+		interactableTouchGO = other.gameObject;
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
 		if (other.gameObject.tag != "Interactable") return;
 
 		interactableClose = false;
-		interactableGO = null;
+		interactableTouchGO = null;
 	}
 
 	public void Interact(InputAction.CallbackContext callbackContext)
@@ -139,18 +141,21 @@ public class Player : MonoBehaviour
 		if (!callbackContext.performed) return;
 		if (interactableClose)
 		{
-			transition = true;
-			// digitalCamera.gameObject.SetActive(true);
-			// interactable.SetActive(false);
-			StartCoroutine(CameraBlendCoroutine());
-			transition = false;
+			interactableSave = interactableTouchGO.GetComponent<Interactable>();
+			StartCoroutine(PlayerToRhythmGameCoroutine());
 		}
+	}
+
+	private IEnumerator PlayerToRhythmGameCoroutine()
+	{
+		yield return StartCoroutine(CameraBlendCoroutine());
+		RythmGameLoad();
 	}
 
 	private void RunInteraction()
 	{
-		Interactable interactable = interactableGO.GetComponent<Interactable>();
-		interactable.Interact(this);
+		interactableSave.Interact(this);
+		Debug.Log("You got " + interactableSave.name);
 	}
 
 	public void SetNewMaterial(Material newMaterial)
@@ -193,8 +198,10 @@ public class Player : MonoBehaviour
 
 	IEnumerator CameraBlendCoroutine()
 	{
-		digitalCameraMain.Priority = 0;
+		transition = true;
 		digitalCameraPlayer.Priority = 1;
+		digitalCameraPlayerRythm.Priority = 0;
+		digitalCameraMain.Priority = 0;
 		// wait to start the blending
 		yield return null;
 		while (cinemachineBrain.IsBlending)
@@ -208,11 +215,8 @@ public class Player : MonoBehaviour
 			digitalCameraPlayer.Lens.FieldOfView -= speedZoom;
 			yield return null;
 		}
-		// RunInteractionWhiteDemon();
-		RunInteraction();
 		yield return new WaitForSeconds(2);
-		RythmGameLoad();
-		// DefaultCameraView();
+		transition = false;
 	}
 
 	void RythmGameLoad()
@@ -233,9 +237,18 @@ public class Player : MonoBehaviour
 
 	public void ReturnPlayer()
 	{
+		StartCoroutine(ReturnPlayerCoroutine());
+	}
+
+	private IEnumerator ReturnPlayerCoroutine()
+	{
+		yield return StartCoroutine(CameraBlendCoroutine());
 		transform.position = lastPositionPlayerMap;
 		transform.rotation = lastRotationPlayerMap;
 		rythmMap.SetActive(false);
 		DefaultCameraView();
+		playerInput.SwitchCurrentActionMap("Player");
+		RunInteraction();
 	}
+
 }
