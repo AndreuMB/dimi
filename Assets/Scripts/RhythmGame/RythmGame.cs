@@ -30,13 +30,11 @@ public class RythmGame : MonoBehaviour
     private List<GameObject> keysList = new();
     public GameObject scoreScreen;
     public GameObject player;
-    private Transform lastTransformPlayerMap;
 
 
 
     void Start()
     {
-        // scoreScreen.SetActive(false);
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
@@ -56,6 +54,7 @@ public class RythmGame : MonoBehaviour
         noteIndexToPlay = 0;
         noteIndexToSpawn = 0;
         currentSong = songs[1];
+        UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
         StartCoroutine(TimerCount(currentSong));
     }
 
@@ -123,23 +122,37 @@ public class RythmGame : MonoBehaviour
         if (currentNote == null) return;
 
         int keyNum = 0;
+        bool gamepad = false;
+
+        switch (callbackContext.action.name)
+        {
+            case "Key1":
+                keyNum = 1;
+                break;
+            case "Key2":
+                keyNum = 2;
+                break;
+            case "Key3":
+                keyNum = 3;
+                break;
+            case "Key4":
+                keyNum = 4;
+                break;
+            default:
+                return;
+        }
+
+        if (callbackContext.control.device is Gamepad) gamepad = true;
 
         if (callbackContext.canceled)
         {
-            if (int.TryParse(callbackContext.control.displayName, out keyNum))
-            {
-                // was successful key exist
-                keysList[keyNum - 1].GetComponent<Key>().KeyRelease();
-            }
+            keysList[keyNum - 1].GetComponent<Key>().KeyRelease();
         }
 
         if (callbackContext.started)
         {
-            if (int.TryParse(callbackContext.control.displayName, out keyNum))
-            {
-                // was successful key exist
-                keysList[keyNum - 1].GetComponent<Key>().KeyPress();
-            }
+            UpdateStringsHint(gamepad);
+            keysList[keyNum - 1].GetComponent<Key>().KeyPress();
 
 
             if (callbackContext.control.displayName == currentNote.stringNum.ToString())
@@ -219,4 +232,11 @@ public class RythmGame : MonoBehaviour
         player.GetComponent<Player>().ReturnPlayer();
     }
 
+    void UpdateStringsHint(bool gamepad)
+    {
+        keysList.ForEach(key =>
+        {
+            key.GetComponent<Key>().SetGamepad(gamepad);
+        });
+    }
 }

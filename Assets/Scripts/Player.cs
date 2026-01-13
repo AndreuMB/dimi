@@ -37,12 +37,10 @@ public class Player : MonoBehaviour
 	[SerializeField] public GameObject wingsRewardGO;
 	private Vector3 lastPositionPlayerMap;
 	private Quaternion lastRotationPlayerMap;
+	private bool gamepad = true;
 
 
 
-
-
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -63,6 +61,9 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		input = playerInput.actions["Move"].ReadValue<Vector2>();
+		Debug.Log("gamepad = " + gamepad);
+		Debug.Log("playerInput.currentControlScheme = " + playerInput.currentControlScheme);
+		gamepad = playerInput.currentControlScheme == "Gamepad";
 	}
 
 	void FixedUpdate()
@@ -249,6 +250,11 @@ public class Player : MonoBehaviour
 		DefaultCameraView();
 		playerInput.SwitchCurrentActionMap("Player");
 		RunInteraction();
+	}
+
+	public bool IsUsingGamepad()
+	{
+		return gamepad;
 	}
 
 }

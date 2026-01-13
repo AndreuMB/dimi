@@ -6,26 +6,38 @@ public class Key : MonoBehaviour
 {
     [SerializeField] Color keyDefaultColor;
     [SerializeField] Color keyPressColor;
-    [SerializeField] GameObject insideKeyGO;
+    [SerializeField] GameObject reactiveKeyboardGO;
+    [SerializeField] GameObject reactiveGamepadGO;
+    [SerializeField] GameObject keyboardHint;
+    [SerializeField] GameObject gamepadHint;
+    GameObject currentReactiveGO;
     Vector3 insideKeyRT;
 
     void Start()
     {
-        insideKeyRT = insideKeyGO.GetComponent<RectTransform>().localScale;
-        insideKeyGO.GetComponent<Image>().color = keyDefaultColor;
+        // insideKeyRT = insideKeyGO.GetComponent<RectTransform>().localScale;
+        // reactiveKeyboardGO.GetComponent<Image>().color = keyDefaultColor;
     }
 
 
     public void KeyPress()
     {
-        insideKeyGO.GetComponent<Image>().color = keyPressColor;
-        insideKeyGO.gameObject.GetComponent<RectTransform>().localScale = new(0.75f, 0.75f, 0.75f);
+        currentReactiveGO.GetComponent<Image>().color = keyPressColor;
+        // if (gamepadHint.activeInHierarchy) 
+        currentReactiveGO.gameObject.GetComponent<RectTransform>().localScale = new(0.9f, 0.9f, 0.9f);
     }
 
     public void KeyRelease()
     {
-        insideKeyGO.GetComponent<Image>().color = keyDefaultColor;
-        insideKeyGO.gameObject.GetComponent<RectTransform>().localScale = new(0.80f, 0.80f, 0.80f);
+        currentReactiveGO.GetComponent<Image>().color = keyDefaultColor;
+        currentReactiveGO.gameObject.GetComponent<RectTransform>().localScale = new(1, 1, 1);
 
+    }
+
+    public void SetGamepad(bool gamepad)
+    {
+        gamepadHint.SetActive(gamepad);
+        keyboardHint.SetActive(!gamepad);
+        currentReactiveGO = gamepad ? reactiveGamepadGO : reactiveKeyboardGO;
     }
 }

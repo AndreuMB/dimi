@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private GameObject buttonHint;
+    [SerializeField] private GameObject gamepadHint;
+    [SerializeField] private GameObject keyboardHint;
+    private GameObject currentHint;
     [SerializeField] private Material whiteMaterial;
     [SerializeField] public Rewards rewardNumber;
     [SerializeField] private RewardEffect effect;
@@ -11,29 +13,33 @@ public class Interactable : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        buttonHint.SetActive(false);
+        gamepadHint.SetActive(false);
+        keyboardHint.SetActive(false);
+        currentHint = gamepadHint;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag != "PlayerCollider") return;
+        if (other.transform.parent.GetComponent<Player>().IsUsingGamepad())
+        {
+            currentHint = gamepadHint;
+        }
+        else
+        {
+            currentHint = keyboardHint;
 
-        if (other.gameObject.tag != "Player") return;
-
-        buttonHint.SetActive(true);
-        // interactableClose = true;
-        // interactable = other.gameObject;
-
+        }
+        Debug.Log(currentHint.name);
+        currentHint.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.gameObject.tag != "Player") return;
+        if (other.gameObject.tag != "PlayerCollider") return;
 
-        buttonHint.SetActive(false);
-
-        // interactableClose = false;
-        // interactable = null;
+        currentHint.SetActive(false);
 
     }
 
