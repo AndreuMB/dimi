@@ -51,18 +51,16 @@ public class Player : MonoBehaviour
 		HideAccessories();
 
 		// comment for test
-		rythmMap.gameObject.SetActive(false);
+		// rythmMap.gameObject.SetActive(false);
 		// rythmMap.GetComponent<RythmGame>().StartSong();
 		// playerInput.SwitchCurrentActionMap("RhythmGame");
-		// RythmGameLoad();
+		RythmGameLoad();
 		// StartCoroutine(CameraBlendCoroutine());
 	}
 
 	void Update()
 	{
 		input = playerInput.actions["Move"].ReadValue<Vector2>();
-		Debug.Log("gamepad = " + gamepad);
-		Debug.Log("playerInput.currentControlScheme = " + playerInput.currentControlScheme);
 		gamepad = playerInput.currentControlScheme == "Gamepad";
 	}
 

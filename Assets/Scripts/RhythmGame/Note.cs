@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,5 +67,5 @@ public class NoteData
 {
     public int stringNum;
     public float secondToSpawn;
-    public float secondToPlay;
+    [NonSerialized] public float secondToPlay;
 }

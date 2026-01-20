@@ -6,6 +6,10 @@ public class SongSO : ScriptableObject
 {
     public string songName;
     // public int songDurationSeconds;
-    public NoteData[] notes;
     public int scoreToPass;
+    // seconds from note spawn until play
+    public float waitStartSong;
+    public float speed;
+    public AudioClip songFile;
+    public NoteData[] notes;
 }

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RythmGame : MonoBehaviour
 {
@@ -30,6 +32,7 @@ public class RythmGame : MonoBehaviour
     private List<GameObject> keysList = new();
     public GameObject scoreScreen;
     public GameObject player;
+    [SerializeField] AudioSource songSource;
 
 
 
@@ -48,14 +51,43 @@ public class RythmGame : MonoBehaviour
 
     public void StartSong()
     {
+        StopAllCoroutines();
         scoreScreen.SetActive(false);
         timer = 0;
         score = 0;
+        scoreTMP.text = score.ToString();
         noteIndexToPlay = 0;
         noteIndexToSpawn = 0;
-        currentSong = songs[1];
+        currentSong = songs[0];
+        EmptyAllStringsNotes();
         UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
+        timerTMP.text = TimerToMinutes();
         StartCoroutine(TimerCount(currentSong));
+        StartCoroutine(StartSongAudio(currentSong));
+    }
+
+    void EmptyAllStringsNotes()
+    {
+        foreach (GameObject bassString in noteSpawns)
+        {
+            EmptyStringNotes(bassString);
+        }
+    }
+
+    void EmptyStringNotes(GameObject bassString)
+    {
+        foreach (Transform child in bassString.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    IEnumerator StartSongAudio(SongSO song)
+    {
+        songSource.clip = song.songFile;
+        Debug.Log(song.waitStartSong);
+        yield return new WaitForSeconds(song.waitStartSong);
+        songSource.Play();
     }
 
     void SpawnNote(int noteString)
@@ -72,7 +104,6 @@ public class RythmGame : MonoBehaviour
     {
         float step = 0.1f;
         bool notesLeft = true;
-        // while (song.songDurationSeconds > timer)
         while (notesLeft)
         {
             yield return new WaitForSeconds(step);
@@ -80,7 +111,8 @@ public class RythmGame : MonoBehaviour
             timer += step;
             CheckForNote(song);
             if (currentNote == null) currentNote = currentSong.notes[noteIndexToPlay];
-            if (timer > currentNote.secondToPlay)
+            float secondToPlay = currentNote.secondToSpawn + currentSong.speed;
+            if (timer > secondToPlay)
             {
                 if (!NextNote()) notesLeft = false;
             }
@@ -110,6 +142,7 @@ public class RythmGame : MonoBehaviour
         if (note.secondToSpawn <= timer)
         {
             note.secondToPlay = note.secondToSpawn + secondsNoteToString;
+            // note.secondToPlay = note.secondToSpawn + currentSong.speed;
             SpawnNote(note.stringNum);
             noteIndexToSpawn++;
         }
@@ -155,7 +188,7 @@ public class RythmGame : MonoBehaviour
             keysList[keyNum - 1].GetComponent<Key>().KeyPress();
 
 
-            if (callbackContext.control.displayName == currentNote.stringNum.ToString())
+            if (keyNum == currentNote.stringNum)
             {
                 ScoreSystem();
             }
@@ -222,7 +255,6 @@ public class RythmGame : MonoBehaviour
         {
             Debug.Log("Try Again");
             scoreScreen.GetComponent<ScoreScreen>().ShowSubText();
-
         }
 
     }

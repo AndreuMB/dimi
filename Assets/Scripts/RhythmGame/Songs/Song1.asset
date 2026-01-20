@@ -13,20 +13,22 @@ MonoBehaviour:
   m_Name: Song1
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
   songName: song 1
+  scoreToPass: 1000
+  waitStartSong: 0.5
+  speed: 4
+  songFile: {fileID: 8300000, guid: 1edd9fa982389e5dc9fe55c263668e22, type: 3}
   notes:
   - stringNum: 1
-    secondToSpawn: 1
-    secondToPlay: 5
-  - stringNum: 1
-    secondToSpawn: 4
-    secondToPlay: 8
-  - stringNum: 1
-    secondToSpawn: 5
-    secondToPlay: 9
-  - stringNum: 2
-    secondToSpawn: 7
-    secondToPlay: 11
+    secondToSpawn: 0
+  - stringNum: 4
+    secondToSpawn: 1.2
   - stringNum: 3
-    secondToSpawn: 10
-    secondToPlay: 14
-  scoreToPass: 1000
+    secondToSpawn: 1.6
+  - stringNum: 2
+    secondToSpawn: 2.5
+  - stringNum: 1
+    secondToSpawn: 3
+  - stringNum: 3
+    secondToSpawn: 3.6
+  - stringNum: 1
+    secondToSpawn: 4.3

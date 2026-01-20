@@ -30,7 +30,6 @@ public class Interactable : MonoBehaviour
             currentHint = keyboardHint;
 
         }
-        Debug.Log(currentHint.name);
         currentHint.SetActive(true);
     }
 
