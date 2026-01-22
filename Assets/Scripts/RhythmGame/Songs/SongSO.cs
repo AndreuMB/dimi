@@ -8,7 +8,7 @@ public class SongSO : ScriptableObject
     // public int songDurationSeconds;
     public int scoreToPass;
     // seconds from note spawn until play
-    public float waitStartSong;
+    public float delay;
     public float speed;
     public AudioClip songFile;
     public NoteData[] notes;

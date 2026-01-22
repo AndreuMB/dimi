@@ -14,21 +14,143 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
   songName: song 1
   scoreToPass: 1000
-  waitStartSong: 0.5
+  delay: 0
   speed: 4
   songFile: {fileID: 8300000, guid: 1edd9fa982389e5dc9fe55c263668e22, type: 3}
   notes:
   - stringNum: 1
-    secondToSpawn: 0
+    secondToPlay: 3.5
   - stringNum: 4
-    secondToSpawn: 1.2
+    secondToPlay: 4.5
   - stringNum: 3
-    secondToSpawn: 1.6
+    secondToPlay: 4.9
   - stringNum: 2
-    secondToSpawn: 2.5
+    secondToPlay: 6
   - stringNum: 1
-    secondToSpawn: 3
+    secondToPlay: 6.4
   - stringNum: 3
-    secondToSpawn: 3.6
+    secondToPlay: 7.1
   - stringNum: 1
-    secondToSpawn: 4.3
+    secondToPlay: 7.8
+  - stringNum: 1
+    secondToPlay: 9
+  - stringNum: 2
+    secondToPlay: 9.7
+  - stringNum: 1
+    secondToPlay: 10.4
+  - stringNum: 3
+    secondToPlay: 11
+  - stringNum: 1
+    secondToPlay: 11.7
+  - stringNum: 2
+    secondToPlay: 12.3
+  - stringNum: 1
+    secondToPlay: 13
+  - stringNum: 3
+    secondToPlay: 13.7
+  - stringNum: 1
+    secondToPlay: 14.3
+  - stringNum: 2
+    secondToPlay: 15
+  - stringNum: 1
+    secondToPlay: 15.7
+  - stringNum: 3
+    secondToPlay: 16.3
+  - stringNum: 1
+    secondToPlay: 17
+  - stringNum: 2
+    secondToPlay: 17.6
+  - stringNum: 1
+    secondToPlay: 18.3
+  - stringNum: 3
+    secondToPlay: 18.9
+  - stringNum: 1
+    secondToPlay: 19.6
+  - stringNum: 4
+    secondToPlay: 20.9
+  - stringNum: 1
+    secondToPlay: 24.2
+  - stringNum: 3
+    secondToPlay: 24.4
+  - stringNum: 2
+    secondToPlay: 24.9
+  - stringNum: 1
+    secondToPlay: 26.9
+  - stringNum: 3
+    secondToPlay: 27.1
+  - stringNum: 2
+    secondToPlay: 27.6
+  - stringNum: 1
+    secondToPlay: 29.6
+  - stringNum: 3
+    secondToPlay: 29.8
+  - stringNum: 2
+    secondToPlay: 30.2
+  - stringNum: 1
+    secondToPlay: 33.2
+  - stringNum: 2
+    secondToPlay: 33.7
+  - stringNum: 1
+    secondToPlay: 34.4
+  - stringNum: 3
+    secondToPlay: 35.1
+  - stringNum: 1
+    secondToPlay: 35.8
+  - stringNum: 2
+    secondToPlay: 36.4
+  - stringNum: 1
+    secondToPlay: 37
+  - stringNum: 3
+    secondToPlay: 37.7
+  - stringNum: 1
+    secondToPlay: 38.4
+  - stringNum: 2
+    secondToPlay: 39
+  - stringNum: 1
+    secondToPlay: 39.7
+  - stringNum: 3
+    secondToPlay: 40.3
+  - stringNum: 1
+    secondToPlay: 41
+  - stringNum: 2
+    secondToPlay: 41.7
+  - stringNum: 1
+    secondToPlay: 42.3
+  - stringNum: 3
+    secondToPlay: 43
+  - stringNum: 1
+    secondToPlay: 43.7
+  - stringNum: 4
+    secondToPlay: 44.8
+  - stringNum: 2
+    secondToPlay: 46.3
+  - stringNum: 2
+    secondToPlay: 47
+  - stringNum: 1
+    secondToPlay: 47.4
+  - stringNum: 3
+    secondToPlay: 47.6
+  - stringNum: 2
+    secondToPlay: 48.3
+  - stringNum: 2
+    secondToPlay: 49
+  - stringNum: 2
+    secondToPlay: 49.6
+  - stringNum: 1
+    secondToPlay: 50.1
+  - stringNum: 3
+    secondToPlay: 50.3
+  - stringNum: 2
+    secondToPlay: 50.9
+  - stringNum: 2
+    secondToPlay: 51.5
+  - stringNum: 2
+    secondToPlay: 52.1
+  - stringNum: 1
+    secondToPlay: 52.6
+  - stringNum: 3
+    secondToPlay: 51.5
+  - stringNum: 2
+    secondToPlay: 53.4
+  - stringNum: 1
+    secondToPlay: 54.1

@@ -17,6 +17,7 @@ public class Note : MonoBehaviour
     [SerializeField] Color keyDefaultColor;
     [SerializeField] Color keyPressColor;
     [SerializeField] Image insideKeyImg;
+    public event Action OnNoteMissed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +31,7 @@ public class Note : MonoBehaviour
         transform.position = Vector3.Lerp(startPosition, targetPosition, t);
         if (transform.position.y <= targetPosition.y)
         {
+            OnNoteMissed.Invoke();
             Destroy(gameObject);
         }
     }
@@ -66,6 +68,6 @@ public class Note : MonoBehaviour
 public class NoteData
 {
     public int stringNum;
-    public float secondToSpawn;
-    [NonSerialized] public float secondToPlay;
+    [NonSerialized] public float secondToSpawn;
+    public float secondToPlay;
 }

@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990960a9d6b90694297e5d25c6d5cbf4, type: 3}
+  m_Name: Song1 1
+  m_EditorClassIdentifier: Assembly-CSharp::SongSO
+  songName: song 1
+  scoreToPass: 1000
+  waitStartSong: 0.5
+  speed: 4
+  songFile: {fileID: 8300000, guid: 1edd9fa982389e5dc9fe55c263668e22, type: 3}
+  notes:
+  - stringNum: 1
+    secondToSpawn: 0
+  - stringNum: 4
+    secondToSpawn: 1.2
+  - stringNum: 3
+    secondToSpawn: 1.6
+  - stringNum: 2
+    secondToSpawn: 2.6
+  - stringNum: 1
+    secondToSpawn: 3
+  - stringNum: 3
+    secondToSpawn: 3.8
+  - stringNum: 1
+    secondToSpawn: 4.2
+  - stringNum: 1
+    secondToSpawn: 5.5
+  - stringNum: 2
+    secondToSpawn: 6.2
+  - stringNum: 1
+    secondToSpawn: 7
+  - stringNum: 3
+    secondToSpawn: 7.6
+  - stringNum: 1
+    secondToSpawn: 8.2
+  - stringNum: 2
+    secondToSpawn: 8.8
+  - stringNum: 1
+    secondToSpawn: 9.6
+  - stringNum: 3
+    secondToSpawn: 10
+  - stringNum: 1
+    secondToSpawn: 10.6
+  - stringNum: 2
+    secondToSpawn: 11.2
+  - stringNum: 1
+    secondToSpawn: 11.8
+  - stringNum: 3
+    secondToSpawn: 12.4
+  - stringNum: 1
+    secondToSpawn: 13
+  - stringNum: 2
+    secondToSpawn: 13.6
+  - stringNum: 1
+    secondToSpawn: 14.2
+  - stringNum: 3
+    secondToSpawn: 14.8
+  - stringNum: 1
+    secondToSpawn: 15.4
+  - stringNum: 4
+    secondToSpawn: 17
+  - stringNum: 1
+    secondToSpawn: 20
+  - stringNum: 3
+    secondToSpawn: 20.2
+  - stringNum: 2
+    secondToSpawn: 20.8
+  - stringNum: 1
+    secondToSpawn: 22.6
+  - stringNum: 3
+    secondToSpawn: 22.9
+  - stringNum: 2
+    secondToSpawn: 23.3
+  - stringNum: 1
+    secondToSpawn: 25.3
+  - stringNum: 3
+    secondToSpawn: 25.5
+  - stringNum: 2
+    secondToSpawn: 25.9
+  - stringNum: 1
+    secondToSpawn: 28.8
+  - stringNum: 2
+    secondToSpawn: 29.5
+  - stringNum: 1
+    secondToSpawn: 30.2
+  - stringNum: 3
+    secondToSpawn: 30.8
+  - stringNum: 1
+    secondToSpawn: 31.4
+  - stringNum: 2
+    secondToSpawn: 32.1
+  - stringNum: 1
+    secondToSpawn: 32.8
+  - stringNum: 3
+    secondToSpawn: 33.4
+  - stringNum: 1
+    secondToSpawn: 34.1
+  - stringNum: 2
+    secondToSpawn: 34.7
+  - stringNum: 1
+    secondToSpawn: 35.4
+  - stringNum: 3
+    secondToSpawn: 36
+  - stringNum: 1
+    secondToSpawn: 36.3
+  - stringNum: 2
+    secondToSpawn: 36.8
+  - stringNum: 1
+    secondToSpawn: 37.4
+  - stringNum: 3
+    secondToSpawn: 38.1
+  - stringNum: 1
+    secondToSpawn: 38.7

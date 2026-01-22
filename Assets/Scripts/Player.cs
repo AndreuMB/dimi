@@ -52,10 +52,7 @@ public class Player : MonoBehaviour
 
 		// comment for test
 		// rythmMap.gameObject.SetActive(false);
-		// rythmMap.GetComponent<RythmGame>().StartSong();
-		// playerInput.SwitchCurrentActionMap("RhythmGame");
 		RythmGameLoad();
-		// StartCoroutine(CameraBlendCoroutine());
 	}
 
 	void Update()
@@ -218,6 +215,23 @@ public class Player : MonoBehaviour
 		transition = false;
 	}
 
+	IEnumerator CameraBlendWorldToRhythmCoroutine()
+	{
+		digitalCameraPlayerRythm.Priority = 1;
+		digitalCameraMain.Priority = 0;
+		digitalCameraPlayer.Priority = 0;
+		// wait to start the blending
+		yield return null;
+		while (cinemachineBrain.IsBlending)
+		{
+			yield return null;
+		}
+		// yield return new WaitForSeconds(0.5f);
+		rythmMap.GetComponent<RythmGame>().StartSong();
+		// yield return new WaitForSeconds(2);
+		// transition = false;
+	}
+
 	void RythmGameLoad()
 	{
 		rythmMap.SetActive(true);
@@ -227,11 +241,11 @@ public class Player : MonoBehaviour
 
 		transform.position = rythmMapPlayerSpawn.transform.position;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-		digitalCameraPlayerRythm.Priority = 1;
-		digitalCameraMain.Priority = 0;
-		digitalCameraPlayer.Priority = 0;
+		// digitalCameraPlayerRythm.Priority = 1;
+		// digitalCameraMain.Priority = 0;
+		// digitalCameraPlayer.Priority = 0;
 		playerInput.SwitchCurrentActionMap("RhythmGame");
-		rythmMap.GetComponent<RythmGame>().StartSong();
+		StartCoroutine(CameraBlendWorldToRhythmCoroutine());
 	}
 
 	public void ReturnPlayer()
