@@ -950,7 +950,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -976,8 +976,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 40, y: 5, z: -5}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -1, y: 2.2, z: 2.8000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2723,6 +2723,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bdc52879cf4bc70ab9b71b5b74f9444, type: 2}
+    - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: effect
       value: 
       objectReference: {fileID: 11400000, guid: f50c11bc2eda8f94ca1da0121aa6c9fe, type: 2}
@@ -3935,6 +3939,7 @@ MonoBehaviour:
   rythmMap: {fileID: 1309308545}
   headbandRewardGO: {fileID: 1577713628}
   wingsRewardGO: {fileID: 919132147746625031}
+  defaultSong: {fileID: 11400000, guid: 9195b1c919142f6b586e6a0b557c839f, type: 2}
 --- !u!95 &1426861728
 Animator:
   serializedVersion: 7
@@ -5357,21 +5362,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1000733232}
     m_Modifications:
+    - target: {fileID: 790499279570502714, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899443734715573947, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3356875225350018896, guid: a568432a8a10a6da99e727fa789de623, type: 3}
       propertyPath: m_Name
       value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153100636931780902, guid: a568432a8a10a6da99e727fa789de623, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5246093328185291715, guid: a568432a8a10a6da99e727fa789de623, type: 3}
       propertyPath: m_Pivot.x
@@ -5451,6 +5452,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246093328185291715, guid: a568432a8a10a6da99e727fa789de623, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241455873096111123, guid: a568432a8a10a6da99e727fa789de623, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5775,10 +5780,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 375082373}
     m_Modifications:
+    - target: {fileID: 207066401554192894, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.26737964
+      objectReference: {fileID: 0}
+    - target: {fileID: 207066401554192894, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.76470584
+      objectReference: {fileID: 0}
+    - target: {fileID: 207066401554192894, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463733786475213167, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: m_Name
+      value: RedColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 11400000, guid: 9195b1c919142f6b586e6a0b557c839f, type: 2}
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: effect
       value: 
-      objectReference: {fileID: 11400000, guid: 97548d25859a37de99d5cc2f4acafa79, type: 2}
+      objectReference: {fileID: 11400000, guid: 0ec706da1c7fe73e096ef650b22624e1, type: 2}
     - target: {fileID: 1771014964748459389, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5847,6 +5872,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5502554063196951150, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bb963b17c473093eb47d230e503c3e0, type: 2}
     - target: {fileID: 6809494568381205743, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

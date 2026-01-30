@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
 	[SerializeField] public GameObject wingsRewardGO;
 	private Vector3 lastPositionPlayerMap;
 	private Quaternion lastRotationPlayerMap;
-	private bool gamepad = true;
-
+	private bool gamepad = false;
+	[SerializeField] private SongSO defaultSong;
 
 
 	void Start()
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 		HideAccessories();
 
 		// comment for test
-		// rythmMap.gameObject.SetActive(false);
+		rythmMap.gameObject.SetActive(false);
 		RythmGameLoad();
 	}
 
@@ -227,14 +227,15 @@ public class Player : MonoBehaviour
 			yield return null;
 		}
 		// yield return new WaitForSeconds(0.5f);
-		rythmMap.GetComponent<RythmGame>().StartSong();
+
+		rythmMap.GetComponent<RythmGame>().StartSong(interactableSave ? interactableSave.song : defaultSong);
+
 		// yield return new WaitForSeconds(2);
 		// transition = false;
 	}
 
 	void RythmGameLoad()
 	{
-		rythmMap.SetActive(true);
 		// rythmMap.GetComponent<RythmGame>().SetLastTransformPlayerMap(transform);
 		lastPositionPlayerMap = transform.position;
 		lastRotationPlayerMap = transform.rotation;
@@ -245,6 +246,7 @@ public class Player : MonoBehaviour
 		// digitalCameraMain.Priority = 0;
 		// digitalCameraPlayer.Priority = 0;
 		playerInput.SwitchCurrentActionMap("RhythmGame");
+		rythmMap.SetActive(true);
 		StartCoroutine(CameraBlendWorldToRhythmCoroutine());
 	}
 

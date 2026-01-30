@@ -57,22 +57,22 @@ public class RythmGame : MonoBehaviour
 
     void OnEnable()
     {
+        UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
         scoreScreen.SetActive(false);
     }
 
-    public void StartSong()
+    public void StartSong(SongSO song)
     {
         StopAllCoroutines();
         scoreScreen.SetActive(false);
         timer = 0;
         score = 0;
         scoreTMP.text = score.ToString();
-        currentSong = songs[0];
+        currentSong = song;
         noteIndexToPlay = startFromNote < currentSong.notes.Length ? startFromNote : 0;
         noteIndexToSpawn = startFromNote < currentSong.notes.Length ? startFromNote : 0;
         currentNote = currentSong.notes[noteIndexToPlay];
         EmptyAllStringsNotes();
-        UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
         timerTMP.text = TimerToMinutes();
         StartCoroutine(StartSongAudio(currentSong));
     }
@@ -105,7 +105,6 @@ public class RythmGame : MonoBehaviour
             songSource.time = 0;
             // float secondToSpawnFirstNote = currentSong.notes[0].secondToPlay - currentSong.speed;
             // float offset = 0 - startTime;
-            Debug.Log(Math.Abs(startTime));
             yield return new WaitForSeconds(Math.Abs(startTime));
         }
         else
@@ -152,7 +151,8 @@ public class RythmGame : MonoBehaviour
 
     void SpawnNote(int noteString)
     {
-        GameObject noteGO = Instantiate(notePrefab, noteSpawns[noteString - 1].transform);
+        Transform noteSpawnTransform = noteSpawns[noteString - 1].transform;
+        GameObject noteGO = Instantiate(notePrefab, noteSpawnTransform);
         Note note = noteGO.GetComponent<Note>();
         note.triggerStringPosition = triggerString.transform.position;
         note.SetSecondsToReachTarget(currentSong.speed);

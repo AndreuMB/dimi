@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
   songName: song 2
   scoreToPass: 0
+  delay: 4
   speed: 4
-  songFile: {fileID: 8300000, guid: 1edd9fa982389e5dc9fe55c263668e22, type: 3}
+  songFile: {fileID: 8300000, guid: 9ec065729752dc855af01088f1d998b2, type: 3}
   notes:
   - stringNum: 1
-    secondToSpawn: 1
+    secondToPlay: 0
+  - stringNum: 2
+    secondToPlay: 2

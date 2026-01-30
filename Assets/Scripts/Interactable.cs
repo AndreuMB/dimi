@@ -5,9 +5,10 @@ public class Interactable : MonoBehaviour
     [SerializeField] private GameObject gamepadHint;
     [SerializeField] private GameObject keyboardHint;
     private GameObject currentHint;
-    [SerializeField] private Material whiteMaterial;
-    [SerializeField] public Rewards rewardNumber;
+    // [SerializeField] private Material whiteMaterial;
+    // [SerializeField] public Rewards rewardNumber;
     [SerializeField] private RewardEffect effect;
+    [SerializeField] public SongSO song;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,25 +43,15 @@ public class Interactable : MonoBehaviour
 
     }
 
-    public Material GetInteractableWhiteColor()
-    {
-        return whiteMaterial;
-    }
-
-    public bool EnableInteractableHeatband()
-    {
-        return true;
-    }
-
     public void Interact(Player characterController)
     {
         effect.Give(characterController);
     }
 }
 
-public enum Rewards
-{
-    WhiteMaterial,
-    Headband,
+// public enum Rewards
+// {
+//     WhiteMaterial,
+//     Headband,
 
-}
+// }
