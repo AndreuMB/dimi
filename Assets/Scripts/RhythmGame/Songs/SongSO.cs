@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -12,4 +13,6 @@ public class SongSO : ScriptableObject
     public float speed;
     public AudioClip songFile;
     public NoteData[] notes;
+    public List<Note2> notes2 = new();
+
 }

@@ -49,9 +49,9 @@ public class Player : MonoBehaviour
 		animatorWings = wingsRewardGO.GetComponent<Animator>();
 		digitalCameraPlayer.gameObject.SetActive(true);
 		HideAccessories();
+		rythmMap.gameObject.SetActive(false);
 
 		// comment for test
-		rythmMap.gameObject.SetActive(false);
 		RythmGameLoad();
 	}
 
@@ -269,6 +269,12 @@ public class Player : MonoBehaviour
 	public bool IsUsingGamepad()
 	{
 		return gamepad;
+	}
+
+	public void ToggleMenu(InputAction.CallbackContext callbackContext)
+	{
+		if (!callbackContext.performed) return;
+		Debug.Log("Toggle Menu");
 	}
 
 }

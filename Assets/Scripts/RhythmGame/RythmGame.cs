@@ -35,6 +35,7 @@ public class RythmGame : MonoBehaviour
     public GameObject player;
     [SerializeField] AudioSource songSource;
     [SerializeField] int startFromNote = 0;
+    // [SerializeField] Song songtest;
     // bool startingSong;
     // float spawnTime;
     // float songStartDSPTime;
@@ -44,6 +45,7 @@ public class RythmGame : MonoBehaviour
 
     void Start()
     {
+        Song2();
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
@@ -55,6 +57,25 @@ public class RythmGame : MonoBehaviour
         }
     }
 
+    Song Song2()
+    {
+        Song song = new();
+        song.bpm = 94;
+        song.notes.Add(new Note2(1, 5));
+        song.notes.Add(new Note2(1, 7));
+        song.notes.Add(new Note2(2, 9));
+        song.notes.Add(new Note2(4, 11));
+        song.notes.Add(new Note2(4, 13));
+        song.notes.Add(new Note2(4, 15));
+        song.notes.Add(new Note2(4, 17));
+        song.notes.Add(new Note2(4, 19));
+        song.notes.Add(new Note2(4, 25));
+        song.notes.Add(new Note2(4, 27));
+        song.notes.Add(new Note2(4, 29));
+        song.notes.Add(new Note2(4, 31));
+        return song;
+    }
+
     void OnEnable()
     {
         UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
@@ -64,6 +85,7 @@ public class RythmGame : MonoBehaviour
     public void StartSong(SongSO song)
     {
         StopAllCoroutines();
+        ResumeGame();
         scoreScreen.SetActive(false);
         timer = 0;
         score = 0;
@@ -95,16 +117,14 @@ public class RythmGame : MonoBehaviour
 
     IEnumerator StartSongAudio(SongSO song)
     {
-        // startingSong = true;
         songSource.clip = song.songFile;
         float startTime = currentSong.notes[startFromNote].secondToPlay - currentSong.speed;
-        StartCoroutine(TimerCount());
+        StartCoroutine(TimerCountV2());
 
         if (startTime <= 0)
         {
             songSource.time = 0;
-            // float secondToSpawnFirstNote = currentSong.notes[0].secondToPlay - currentSong.speed;
-            // float offset = 0 - startTime;
+            // Math.Abs negative to positive number
             yield return new WaitForSeconds(Math.Abs(startTime));
         }
         else
@@ -113,40 +133,84 @@ public class RythmGame : MonoBehaviour
         }
 
         songSource.Play();
-        // gameTime = -currentSong.speed;
-
-        // songStartDSPTime = (float)AudioSettings.dspTime;
 
         yield return null;
     }
 
     IEnumerator TimerCount()
     {
-        NoteData currentNoteToSpawn;
-
         while (songSource.clip.length > songSource.time)
         {
             // gameTime = (float)(AudioSettings.dspTime - songStartDSPTime) - currentSong.speed;
             timer = songSource.time;
             // timer = gameTime;
             timerTMP.text = TimerToMinutes();
-            // no more notes to play
-            if (noteIndexToSpawn < currentSong.notes.Length)
-            {
-                currentNoteToSpawn = currentSong.notes[noteIndexToSpawn];
-                float secondToSpawn = currentNoteToSpawn.secondToPlay - currentSong.speed;
+            NextNote(currentSong.notes[noteIndexToSpawn]);
+            yield return null;
+        }
+        FinishSong();
+    }
 
-                if (secondToSpawn <= timer)
-                {
-                    // CheckForNote(currentSong, noteIndex);
-                    SpawnNote(currentNoteToSpawn.stringNum);
-                    noteIndexToSpawn++;
-                }
-            }
+    IEnumerator TimerCountV2()
+    {
+        Song currentSong = Song2();
+        // bool wholeNum = currentBeat % 1 == 0;
+        // if (wholeNum) currentBeat++;
+
+        while (songSource.clip.length > songSource.time)
+        {
+            int currentBeat = GetCurrentBeat(currentSong);
+            Debug.Log("currentBeat = " + currentBeat);
+            // gameTime = (float)(AudioSettings.dspTime - songStartDSPTime) - currentSong.speed;
+            timer = songSource.time;
+            // timer = gameTime;
+            timerTMP.text = TimerToMinutes();
+            // NextNote(currentSong.notes[noteIndexToSpawn]);
+            NextNotev2(currentSong, currentBeat);
             yield return null;
 
         }
         FinishSong();
+    }
+
+    int GetCurrentBeat(Song song)
+    {
+        float fpb = song.GetFpb();
+
+        int currentBeat = Mathf.FloorToInt(songSource.timeSamples / fpb);
+        return currentBeat;
+    }
+
+    void NextNote(NoteData currentNoteToSpawn)
+    {
+        if (noteIndexToSpawn < currentSong.notes.Length)
+        {
+            float secondToSpawn = currentNoteToSpawn.secondToPlay - currentSong.speed;
+
+            if (secondToSpawn <= timer)
+            {
+                SpawnNote(currentNoteToSpawn.stringNum);
+                noteIndexToSpawn++;
+            }
+        }
+
+    }
+
+    void NextNotev2(Song song, int currentBeat)
+    {
+        // check more notes to play
+        if (noteIndexToSpawn < song.notes.Count)
+        {
+            Note2 noteToSpawn = song.notes[noteIndexToSpawn];
+            int beatToSpawn = noteToSpawn.beat - song.speed;
+            // float secondToSpawn = currentNoteToSpawn.second - currentSong.speed;
+
+            if (beatToSpawn <= currentBeat)
+            {
+                SpawnNote(noteToSpawn.bassString);
+                noteIndexToSpawn++;
+            }
+        }
     }
 
     void SpawnNote(int noteString)
@@ -160,60 +224,6 @@ public class RythmGame : MonoBehaviour
         notesGOList.Add(noteGO);
         note.OnNoteMissed += NextCurrentNote;
     }
-
-    // IEnumerator TimerCount(SongSO song)
-    // {
-    //     float step = 0.1f;
-    //     bool notesLeft = true;
-    //     float offset = currentSong.notes[noteIndexToSpawn].secondToSpawn;
-    //     timer = offset;
-
-    //     while (notesLeft)
-    //     {
-    //         yield return new WaitForSeconds(step);
-    //         timerTMP.text = TimerToMinutes();
-    //         timer += step;
-    //         CheckForNote(song);
-    //         if (currentNote == null) currentNote = currentSong.notes[noteIndexToPlay];
-    //         float secondToPlay = currentNote.secondToSpawn + currentSong.speed;
-    //         currentNote.secondToPlay = secondToPlay;
-    //         if (timer > secondToPlay)
-    //         {
-    //             if (!NextNote()) notesLeft = false;
-    //         }
-    //     }
-
-    //     FinishSong();
-    // }
-
-    // bool NextNote()
-    // {
-    //     noteIndexToPlay++;
-    //     if (noteIndexToPlay < currentSong.notes.Length)
-    //     {
-    //         currentNote = currentSong.notes[noteIndexToPlay];
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
-    // void CheckForNote(SongSO song, int noteIndex)
-    // {
-    //     if (noteIndex >= currentSong.notes.Length) return;
-    //     NoteData note = song.notes[noteIndex];
-    //     if (note.secondToSpawn <= timer)
-    //     {
-    //         // note.secondToPlay = note.secondToSpawn + secondsNoteToString;
-    //         // note.secondToPlay = note.secondToSpawn + currentSong.speed;
-    //         SpawnNote(note.stringNum);
-    //         // noteIndexToSpawn++;
-    //     }
-
-
-    // }
 
     public void HandlePlayerInput(InputAction.CallbackContext callbackContext)
     {
@@ -255,14 +265,14 @@ public class RythmGame : MonoBehaviour
 
             if (keyNum == currentNote.stringNum)
             {
-                ScoreSystem();
+                ScoreSystem(currentNote);
             }
         }
 
 
     }
 
-    void ScoreSystem()
+    void ScoreSystem(NoteData currentNote)
     {
         float accuracy = currentNote.secondToPlay - timer;
         // Debug.Log("currentNote.secondToPlay = " + currentNote.secondToPlay);
@@ -348,4 +358,33 @@ public class RythmGame : MonoBehaviour
             key.GetComponent<Key>().SetGamepad(gamepad);
         });
     }
+
+    public void ToggleMenuInput(InputAction.CallbackContext callbackContext)
+    {
+        if (!callbackContext.performed) return;
+        ToggleMenu();
+    }
+
+    public void ToggleMenu()
+    {
+        scoreScreen.SetActive(!scoreScreen.activeInHierarchy);
+        if (scoreScreen.activeInHierarchy)
+        {
+            Time.timeScale = 0;
+            scoreScreen.GetComponent<ScoreScreen>().SetScore(score + "");
+            songSource.Pause();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            songSource.Play();
+        }
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
+        songSource.Play();
+    }
+
 }
