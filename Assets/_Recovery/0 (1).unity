@@ -2862,7 +2862,7 @@ PrefabInstance:
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 11400000, guid: e237efba4334d23a3a7660223ff536f4, type: 2}
+      objectReference: {fileID: 11400000, guid: 4bdc52879cf4bc70ab9b71b5b74f9444, type: 2}
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: effect
       value: 
@@ -4108,7 +4108,7 @@ MonoBehaviour:
   rythmMap: {fileID: 1309308545}
   headbandRewardGO: {fileID: 1577713628}
   wingsRewardGO: {fileID: 919132147746625031}
-  defaultSong: {fileID: 11400000, guid: e237efba4334d23a3a7660223ff536f4, type: 2}
+  defaultSong: {fileID: 11400000, guid: 4bdc52879cf4bc70ab9b71b5b74f9444, type: 2}
 --- !u!95 &1426861728
 Animator:
   serializedVersion: 7
@@ -4796,6 +4796,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreScreen
   scoreTMP: {fileID: 311277453}
   subText: {fileID: 96960938}
+  restartEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1669988072
 GameObject:
   m_ObjectHideFlags: 0
@@ -6102,7 +6105,7 @@ PrefabInstance:
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 11400000, guid: c9f177bdcc3bf544d94a9a14034d0d2d, type: 2}
+      objectReference: {fileID: 11400000, guid: 9195b1c919142f6b586e6a0b557c839f, type: 2}
     - target: {fileID: 1670436806993421361, guid: 6c23b99e75073503abc40590b3bb275d, type: 3}
       propertyPath: effect
       value: 

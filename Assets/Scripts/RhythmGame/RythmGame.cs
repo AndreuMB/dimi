@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,10 +20,12 @@ public class RythmGame : MonoBehaviour
     [SerializeField] private float secondsNoteToString;
     [SerializeField] private int limit;
     [SerializeField] private List<SongSO> songs;
-    private float timer = 0;
+    // private float timer = 0;
     [SerializeField] private TMP_Text timerTMP;
-    private SongSO currentSong;
-    private NoteData currentNote;
+    // private SongSO currentSong;
+    private Song currentSong;
+    private Note2 currentNote;
+    // private NoteData currentNote;
     private List<GameObject> notesGOList = new();
     [SerializeField] GameObject triggerString;
     int noteIndexToSpawn = 0;
@@ -45,7 +48,6 @@ public class RythmGame : MonoBehaviour
 
     void Start()
     {
-        Song2();
         for (int i = 0; i < noteSpawnsGO.transform.childCount; i++)
         {
             noteSpawns.Add(noteSpawnsGO.transform.GetChild(i).gameObject);
@@ -57,22 +59,18 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    Song Song2()
+    Song Song2(Song song)
     {
-        Song song = new();
-        song.bpm = 94;
-        song.notes.Add(new Note2(1, 5));
-        song.notes.Add(new Note2(1, 7));
-        song.notes.Add(new Note2(2, 9));
-        song.notes.Add(new Note2(4, 11));
-        song.notes.Add(new Note2(4, 13));
-        song.notes.Add(new Note2(4, 15));
-        song.notes.Add(new Note2(4, 17));
-        song.notes.Add(new Note2(4, 19));
-        song.notes.Add(new Note2(4, 25));
-        song.notes.Add(new Note2(4, 27));
-        song.notes.Add(new Note2(4, 29));
-        song.notes.Add(new Note2(4, 31));
+        // Song song = new();
+        // song.bpm = 94;
+
+        int[] pattern = { 1, 2, 3, 2 };
+
+        for (int i = 0; i <= 200; i++)
+        {
+            song.notes.Add(new Note2(pattern[i % pattern.Length], i));
+        }
+
         return song;
     }
 
@@ -82,21 +80,49 @@ public class RythmGame : MonoBehaviour
         scoreScreen.SetActive(false);
     }
 
-    public void StartSong(SongSO song)
+    // public void StartSong(SongSO song)
+    // {
+    //     StopAllCoroutines();
+    //     Time.timeScale = 1;
+    //     scoreScreen.SetActive(false);
+    //     // scoreScreen.GetComponent<ScoreScreen>().restartEvent.AddListener(StartSong);
+    //     // scoreScreen.GetComponent<ScoreScreen>().restartEvent.Invoke(song);
+    //     timer = 0;
+    //     score = 0;
+    //     scoreTMP.text = score.ToString();
+    //     // currentSong = song;
+    //     noteIndexToPlay = startFromNote < song.notes.Length ? startFromNote : 0;
+    //     noteIndexToSpawn = startFromNote < song.notes.Length ? startFromNote : 0;
+    //     // currentNote = song.notes[noteIndexToPlay];
+    //     EmptyAllStringsNotes();
+    //     timerTMP.text = TimerToMinutes();
+    //     StartCoroutine(StartSongAudio(song));
+    // }
+
+    public void StartSong(Song song)
     {
+        song = Song2(song);
         StopAllCoroutines();
-        ResumeGame();
+        Time.timeScale = 1;
         scoreScreen.SetActive(false);
-        timer = 0;
+        // scoreScreen.GetComponent<ScoreScreen>().restartEvent.AddListener(StartSong);
+        // scoreScreen.GetComponent<ScoreScreen>().restartEvent.Invoke(song);
+        // timer = 0;
         score = 0;
         scoreTMP.text = score.ToString();
         currentSong = song;
-        noteIndexToPlay = startFromNote < currentSong.notes.Length ? startFromNote : 0;
-        noteIndexToSpawn = startFromNote < currentSong.notes.Length ? startFromNote : 0;
-        currentNote = currentSong.notes[noteIndexToPlay];
+        noteIndexToPlay = startFromNote < song.notes.Count ? startFromNote : 0;
+        noteIndexToSpawn = startFromNote < song.notes.Count ? startFromNote : 0;
+        currentNote = song.notes[noteIndexToPlay];
         EmptyAllStringsNotes();
-        timerTMP.text = TimerToMinutes();
-        StartCoroutine(StartSongAudio(currentSong));
+        // StartCoroutine(StartSongAudio(song));
+        StartSongAudio(song);
+    }
+
+    public void RestartSong()
+    {
+        songSource.Stop();
+        StartSong(currentSong);
     }
 
     void EmptyAllStringsNotes()
@@ -115,58 +141,93 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    IEnumerator StartSongAudio(SongSO song)
+    // IEnumerator StartSongAudio(SongSO song)
+    // {
+    //     songSource.clip = song.songFile;
+    //     float startTime = song.notes[startFromNote].secondToPlay - currentSong.speed;
+    //     StartCoroutine(TimerCountV2());
+
+    //     if (startTime <= 0)
+    //     {
+    //         songSource.time = 0;
+    //         // Math.Abs negative to positive number
+    //         yield return new WaitForSeconds(Math.Abs(startTime));
+    //     }
+    //     else
+    //     {
+    //         songSource.time = startTime;
+    //     }
+
+    //     songSource.Play();
+
+    //     yield return null;
+    // }
+
+    async void StartSongAudio(Song song)
     {
         songSource.clip = song.songFile;
-        float startTime = currentSong.notes[startFromNote].secondToPlay - currentSong.speed;
-        StartCoroutine(TimerCountV2());
+        // int startBeat = song.notes[startFromNote].beatToPlay - currentSong.speed;
+        int startTime = song.notes[startFromNote].beatToPlay * song.GetFpb() - currentSong.speed * song.GetFpb();
+        // int startTime = song.notes[startFromNote].beatToPlay - currentSong.speed;
 
-        if (startTime <= 0)
-        {
-            songSource.time = 0;
-            // Math.Abs negative to positive number
-            yield return new WaitForSeconds(Math.Abs(startTime));
-        }
-        else
-        {
-            songSource.time = startTime;
-        }
+        // StartCoroutine(TimerCount());
+        // BREAKS, INFINITE LOOP!
+        // TimerCount();
+        songSource.timeSamples = startTime;
+        StartCoroutine(TimerCount());
+        await GenerateFalseBeats();
+
+        // Debug.Log("startTime = " + startTime);
+
 
         songSource.Play();
+        timerTMP.text = TimerToMinutes(songSource.time);
 
-        yield return null;
+
+
+
+        // yield return null;
     }
+
+    async Awaitable GenerateFalseBeats()
+    {
+        while (songSource.timeSamples < 0)
+        {
+            await Task.Delay(Mathf.FloorToInt(currentSong.spb * 1000));
+            // WaitForSeconds(currentSong.spb);
+            songSource.timeSamples += currentSong.GetFpb();
+        }
+    }
+
+
+    // IEnumerator TimerCount()
+    // {
+    //     while (songSource.clip.length > songSource.time)
+    //     {
+    //         float timer = songSource.time;
+    //         timerTMP.text = TimerToMinutes(timer);
+    //         NextNote(currentSong.notes[noteIndexToSpawn]);
+    //         yield return null;
+    //     }
+    //     FinishSong();
+    // }
 
     IEnumerator TimerCount()
     {
-        while (songSource.clip.length > songSource.time)
-        {
-            // gameTime = (float)(AudioSettings.dspTime - songStartDSPTime) - currentSong.speed;
-            timer = songSource.time;
-            // timer = gameTime;
-            timerTMP.text = TimerToMinutes();
-            NextNote(currentSong.notes[noteIndexToSpawn]);
-            yield return null;
-        }
-        FinishSong();
-    }
-
-    IEnumerator TimerCountV2()
-    {
-        Song currentSong = Song2();
+        // Song currentSong = Song2();
         // bool wholeNum = currentBeat % 1 == 0;
         // if (wholeNum) currentBeat++;
 
         while (songSource.clip.length > songSource.time)
         {
             int currentBeat = GetCurrentBeat(currentSong);
-            Debug.Log("currentBeat = " + currentBeat);
+            // Debug.Log("currentBeat = " + currentBeat);
             // gameTime = (float)(AudioSettings.dspTime - songStartDSPTime) - currentSong.speed;
-            timer = songSource.time;
+            float timer = songSource.time;
             // timer = gameTime;
-            timerTMP.text = TimerToMinutes();
+            timerTMP.text = TimerToMinutes(timer);
             // NextNote(currentSong.notes[noteIndexToSpawn]);
-            NextNotev2(currentSong, currentBeat);
+            NextNote(currentSong, currentBeat);
             yield return null;
 
         }
@@ -176,35 +237,20 @@ public class RythmGame : MonoBehaviour
     int GetCurrentBeat(Song song)
     {
         float fpb = song.GetFpb();
-
         int currentBeat = Mathf.FloorToInt(songSource.timeSamples / fpb);
         return currentBeat;
     }
 
-    void NextNote(NoteData currentNoteToSpawn)
-    {
-        if (noteIndexToSpawn < currentSong.notes.Length)
-        {
-            float secondToSpawn = currentNoteToSpawn.secondToPlay - currentSong.speed;
 
-            if (secondToSpawn <= timer)
-            {
-                SpawnNote(currentNoteToSpawn.stringNum);
-                noteIndexToSpawn++;
-            }
-        }
-
-    }
-
-    void NextNotev2(Song song, int currentBeat)
+    void NextNote(Song song, int currentBeat)
     {
         // check more notes to play
         if (noteIndexToSpawn < song.notes.Count)
         {
             Note2 noteToSpawn = song.notes[noteIndexToSpawn];
             int beatToSpawn = noteToSpawn.beat - song.speed;
-            // float secondToSpawn = currentNoteToSpawn.second - currentSong.speed;
-
+            Debug.Log("beatToSpawn = " + beatToSpawn);
+            Debug.Log("currentBeat = " + currentBeat);
             if (beatToSpawn <= currentBeat)
             {
                 SpawnNote(noteToSpawn.bassString);
@@ -212,6 +258,22 @@ public class RythmGame : MonoBehaviour
             }
         }
     }
+
+    // void NextNote(NoteData currentNoteToSpawn)
+    // {
+    //     if (noteIndexToSpawn < currentSong.notes.Length)
+    //     {
+    //         float secondToSpawn = currentNoteToSpawn.secondToPlay - currentSong.speed;
+
+    //         if (secondToSpawn <= timer)
+    //         {
+    //             SpawnNote(currentNoteToSpawn.stringNum);
+    //             noteIndexToSpawn++;
+    //         }
+    //     }
+
+    // }
+
 
     void SpawnNote(int noteString)
     {
@@ -263,20 +325,19 @@ public class RythmGame : MonoBehaviour
             keysList[keyNum - 1].GetComponent<Key>().KeyPress();
 
 
-            if (keyNum == currentNote.stringNum)
+            if (keyNum == currentNote.bassString)
             {
-                ScoreSystem(currentNote);
+                ScoreSystem(currentNote, GetCurrentBeat(currentSong));
             }
         }
 
 
     }
 
-    void ScoreSystem(NoteData currentNote)
+    void ScoreSystem(Note2 currentNote, int currentBeat)
     {
-        float accuracy = currentNote.secondToPlay - timer;
-        // Debug.Log("currentNote.secondToPlay = " + currentNote.secondToPlay);
-        Debug.Log("timer = " + timer);
+        float accuracy = currentNote.beatToPlay - currentBeat;
+        Debug.Log("currentBeat = " + currentBeat);
         Debug.Log("accuracy = " + accuracy);
         if (accuracy > 0.6)
         {
@@ -317,11 +378,11 @@ public class RythmGame : MonoBehaviour
     public void NextCurrentNote()
     {
         noteIndexToPlay++;
-        if (noteIndexToPlay >= currentSong.notes.Length) return;
+        if (noteIndexToPlay >= currentSong.notes.Count) return;
         currentNote = currentSong.notes[noteIndexToPlay];
     }
 
-    string TimerToMinutes()
+    string TimerToMinutes(float timer)
     {
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer - minutes * 60);
@@ -376,8 +437,7 @@ public class RythmGame : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
-            songSource.Play();
+            ResumeGame();
         }
     }
 

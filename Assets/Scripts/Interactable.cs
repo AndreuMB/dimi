@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
     // [SerializeField] private Material whiteMaterial;
     // [SerializeField] public Rewards rewardNumber;
     [SerializeField] private RewardEffect effect;
-    [SerializeField] public SongSO song;
+    [SerializeField] public Song song;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

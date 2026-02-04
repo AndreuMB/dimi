@@ -22,8 +22,6 @@ public class Note : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
-        // Debug.Log("x = " + transform.position.x);
-        // Debug.Log("y = " + transform.position.y);
         targetPosition = new(transform.position.x, triggerStringPosition.y);
     }
 

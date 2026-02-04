@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 	private Vector3 lastPositionPlayerMap;
 	private Quaternion lastRotationPlayerMap;
 	private bool gamepad = false;
-	[SerializeField] private SongSO defaultSong;
+	[SerializeField] private Song defaultSong;
 
 
 	void Start()
@@ -228,7 +228,8 @@ public class Player : MonoBehaviour
 		}
 		// yield return new WaitForSeconds(0.5f);
 
-		rythmMap.GetComponent<RythmGame>().StartSong(interactableSave ? interactableSave.song : defaultSong);
+		// rythmMap.GetComponent<RythmGame>().StartSong(interactableSave ? interactableSave.song : defaultSong);
+		rythmMap.GetComponent<RythmGame>().StartSong(defaultSong);
 
 		// yield return new WaitForSeconds(2);
 		// transition = false;

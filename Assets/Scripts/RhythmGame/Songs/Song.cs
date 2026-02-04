@@ -1,13 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Song
+[System.Serializable]
+[CreateAssetMenu(fileName = "SongSO", menuName = "Scriptable Objects/Song")]
+public class Song : ScriptableObject
 {
     public List<Note2> notes = new();
     // public Note2[] notes;
     public int speed = 4;
     public int bpm = 120;
     public int frequency = 44100;
+    public int scoreToPass;
+    public AudioClip songFile;
+    public float spb;
 
 
     public Song()
@@ -19,13 +25,12 @@ public class Song
         // notes.Add(new Note2(4, 2.5f));
     }
 
-    public float GetFpb()
+    public int GetFpb()
     {
         // second per beat
-        float spb = 60f / bpm;
-        Debug.Log("spb = " + spb);
+        spb = 60f / bpm;
         // frequency per beat
-        float fpb = spb * frequency;
+        int fpb = Mathf.FloorToInt(spb * frequency);
         return fpb;
     }
 
@@ -35,6 +40,7 @@ public class Note2
 {
     public int bassString;
     public int beat;
+    public int beatToPlay;
 
     public Note2(int bassString, int beat)
     {
