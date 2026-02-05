@@ -64,10 +64,10 @@ public class Note : MonoBehaviour
 
 
 
-[System.Serializable]
-public class NoteData
-{
-    public int stringNum;
-    [NonSerialized] public float secondToSpawn;
-    public float secondToPlay;
-}
+// [System.Serializable]
+// public class NoteData
+// {
+//     public int stringNum;
+//     [NonSerialized] public float secondToSpawn;
+//     public float secondToPlay;
+// }

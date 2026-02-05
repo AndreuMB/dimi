@@ -48,3 +48,16 @@ public class Note2
         this.beat = beat;
     }
 }
+
+[System.Serializable]
+public class NoteData
+{
+    public int bassString;
+    public int beat;
+}
+
+[System.Serializable]
+public class SongData
+{
+    public List<NoteData> notes;
+}

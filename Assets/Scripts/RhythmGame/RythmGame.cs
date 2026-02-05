@@ -38,6 +38,7 @@ public class RythmGame : MonoBehaviour
     public GameObject player;
     [SerializeField] AudioSource songSource;
     [SerializeField] int startFromNote = 0;
+    [SerializeField] SongLoader songLoader;
     // [SerializeField] Song songtest;
     // bool startingSong;
     // float spawnTime;
@@ -64,12 +65,13 @@ public class RythmGame : MonoBehaviour
         // Song song = new();
         // song.bpm = 94;
 
-        int[] pattern = { 1, 2, 3, 2 };
+        // int[] pattern = { 1, 2, 3, 2 };
 
-        for (int i = 0; i <= 200; i++)
-        {
-            song.notes.Add(new Note2(pattern[i % pattern.Length], i));
-        }
+        // for (int i = 0; i <= 200; i++)
+        // {
+        //     song.notes.Add(new Note2(pattern[i % pattern.Length], i));
+        // }
+        songLoader.LoadSongFromJson(song, "song2.json");
 
         return song;
     }
@@ -249,8 +251,8 @@ public class RythmGame : MonoBehaviour
         {
             Note2 noteToSpawn = song.notes[noteIndexToSpawn];
             int beatToSpawn = noteToSpawn.beat - song.speed;
-            Debug.Log("beatToSpawn = " + beatToSpawn);
-            Debug.Log("currentBeat = " + currentBeat);
+            // Debug.Log("beatToSpawn = " + beatToSpawn);
+            // Debug.Log("currentBeat = " + currentBeat);
             if (beatToSpawn <= currentBeat)
             {
                 SpawnNote(noteToSpawn.bassString);
