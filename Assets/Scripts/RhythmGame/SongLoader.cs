@@ -8,7 +8,7 @@ public class SongLoader : MonoBehaviour
     public Song LoadSongFromJson(Song song, string fileName)
     {
         // Run GeneratePlaceholderSong first time to genereate beats in the json file
-        // GeneratePlaceholderSong(fileName);
+        GeneratePlaceholderSong(fileName);
 
         Debug.Log(Application.streamingAssetsPath);
         string path = Path.Combine(Application.streamingAssetsPath, fileName);
@@ -16,11 +16,11 @@ public class SongLoader : MonoBehaviour
 
         SongData songData = JsonUtility.FromJson<SongData>(json);
 
-        song.notes = new List<Note2>();
+        song.notes = new List<NoteData>();
 
-        foreach (var note in songData.notes)
+        foreach (NoteData note in songData.notes)
         {
-            song.notes.Add(new Note2(note.bassString, note.beat));
+            song.notes.Add(new NoteData(note.bassString, note.beat));
         }
 
         return song;
@@ -38,18 +38,19 @@ public class SongLoader : MonoBehaviour
 
         SongData data = new SongData
         {
-            notes = new List<NoteData>()
+            notes = new()
         };
+
+        // song.notes = new List<NoteData>();
+        // List<NoteData> notes = new();
 
         int[] pattern = { 1, 2, 3, 2 };
 
         for (int i = 0; i <= 200; i++)
         {
-            data.notes.Add(new NoteData
-            {
-                bassString = pattern[i % pattern.Length],
-                beat = i
-            });
+            int bassString = pattern[i % pattern.Length];
+            int beat = i;
+            data.notes.Add(new NoteData(bassString, beat));
         }
 
         string json = JsonUtility.ToJson(data, true);

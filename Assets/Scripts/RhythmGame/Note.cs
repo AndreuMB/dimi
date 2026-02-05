@@ -18,6 +18,16 @@ public class Note : MonoBehaviour
     [SerializeField] Color keyPressColor;
     [SerializeField] Image insideKeyImg;
     public event Action OnNoteMissed;
+
+    public int bassString;
+    public int beat;
+    public int beatToPlay;
+
+    public Note(int bassString, int beat)
+    {
+        this.bassString = bassString;
+        this.beat = beat;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -2,28 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 [CreateAssetMenu(fileName = "SongSO", menuName = "Scriptable Objects/Song")]
 public class Song : ScriptableObject
 {
-    public List<Note2> notes = new();
+    // [NonSerialized] public List<Note> notes = new();
     // public Note2[] notes;
-    public int speed = 4;
+    public int beatsDelay = 4;
     public int bpm = 120;
     public int frequency = 44100;
     public int scoreToPass;
     public AudioClip songFile;
-    public float spb;
 
+    [NonSerialized] public float spb;
 
-    public Song()
-    {
-        // notes[0] = new(1, 1);
-        // notes.Add(new Note2(1, 0.5f));
-        // notes.Add(new Note2(1, 1.0f));
-        // notes.Add(new Note2(2, 1.75f));
-        // notes.Add(new Note2(4, 2.5f));
-    }
+    public List<NoteData> notes = new();
 
     public int GetFpb()
     {
@@ -36,27 +29,32 @@ public class Song : ScriptableObject
 
 }
 
-public class Note2
+// public class Note2
+// {
+//     public int bassString;
+//     public int beat;
+//     public int beatToPlay;
+
+//     public Note2(int bassString, int beat)
+//     {
+//         this.bassString = bassString;
+//         this.beat = beat;
+//     }
+// }
+
+[Serializable]
+public class NoteData
 {
     public int bassString;
     public int beat;
-    public int beatToPlay;
-
-    public Note2(int bassString, int beat)
+    public NoteData(int bassString, int beat)
     {
         this.bassString = bassString;
         this.beat = beat;
     }
 }
 
-[System.Serializable]
-public class NoteData
-{
-    public int bassString;
-    public int beat;
-}
-
-[System.Serializable]
+[Serializable]
 public class SongData
 {
     public List<NoteData> notes;

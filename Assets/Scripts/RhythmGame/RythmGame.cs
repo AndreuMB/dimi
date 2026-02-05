@@ -19,12 +19,12 @@ public class RythmGame : MonoBehaviour
     // to control the speed
     [SerializeField] private float secondsNoteToString;
     [SerializeField] private int limit;
-    [SerializeField] private List<SongSO> songs;
+    // [SerializeField] private List<SongSO> songs;
     // private float timer = 0;
     [SerializeField] private TMP_Text timerTMP;
     // private SongSO currentSong;
     private Song currentSong;
-    private Note2 currentNote;
+    private NoteData currentNote;
     // private NoteData currentNote;
     private List<GameObject> notesGOList = new();
     [SerializeField] GameObject triggerString;
@@ -169,7 +169,7 @@ public class RythmGame : MonoBehaviour
     {
         songSource.clip = song.songFile;
         // int startBeat = song.notes[startFromNote].beatToPlay - currentSong.speed;
-        int startTime = song.notes[startFromNote].beatToPlay * song.GetFpb() - currentSong.speed * song.GetFpb();
+        int startTime = song.notes[startFromNote].beat * song.GetFpb() - currentSong.beatsDelay * song.GetFpb();
         // int startTime = song.notes[startFromNote].beatToPlay - currentSong.speed;
 
         // StartCoroutine(TimerCount());
@@ -249,8 +249,8 @@ public class RythmGame : MonoBehaviour
         // check more notes to play
         if (noteIndexToSpawn < song.notes.Count)
         {
-            Note2 noteToSpawn = song.notes[noteIndexToSpawn];
-            int beatToSpawn = noteToSpawn.beat - song.speed;
+            NoteData noteToSpawn = song.notes[noteIndexToSpawn];
+            int beatToSpawn = noteToSpawn.beat - song.beatsDelay;
             // Debug.Log("beatToSpawn = " + beatToSpawn);
             // Debug.Log("currentBeat = " + currentBeat);
             if (beatToSpawn <= currentBeat)
@@ -283,7 +283,8 @@ public class RythmGame : MonoBehaviour
         GameObject noteGO = Instantiate(notePrefab, noteSpawnTransform);
         Note note = noteGO.GetComponent<Note>();
         note.triggerStringPosition = triggerString.transform.position;
-        note.SetSecondsToReachTarget(currentSong.speed);
+        float bpf = currentSong.beatsDelay * currentSong.spb;
+        note.SetSecondsToReachTarget(bpf);
         note.SetLimit(limit);
         notesGOList.Add(noteGO);
         note.OnNoteMissed += NextCurrentNote;
@@ -336,9 +337,9 @@ public class RythmGame : MonoBehaviour
 
     }
 
-    void ScoreSystem(Note2 currentNote, int currentBeat)
+    void ScoreSystem(NoteData currentNote, int currentBeat)
     {
-        float accuracy = currentNote.beatToPlay - currentBeat;
+        float accuracy = currentNote.beat - currentBeat;
         Debug.Log("currentBeat = " + currentBeat);
         Debug.Log("accuracy = " + accuracy);
         if (accuracy > 0.6)
