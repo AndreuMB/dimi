@@ -8,10 +8,7 @@
             "bassString": 2,
             "beat": 1
         },
-        {
-            "bassString": 3,
-            "beat": 2
-        },
+        
         {
             "bassString": 2,
             "beat": 3
@@ -23,10 +20,6 @@
         {
             "bassString": 2,
             "beat": 5
-        },
-        {
-            "bassString": 3,
-            "beat": 6
         },
         {
             "bassString": 2,
@@ -41,10 +34,6 @@
             "beat": 9
         },
         {
-            "bassString": 3,
-            "beat": 10
-        },
-        {
             "bassString": 2,
             "beat": 11
         },
@@ -57,24 +46,16 @@
             "beat": 13
         },
         {
-            "bassString": 3,
-            "beat": 14
-        },
-        {
             "bassString": 2,
             "beat": 15
         },
         {
-            "bassString": 1,
+            "bassString": 4,
             "beat": 16
         },
         {
             "bassString": 2,
             "beat": 17
-        },
-        {
-            "bassString": 3,
-            "beat": 18
         },
         {
             "bassString": 2,
@@ -89,10 +70,6 @@
             "beat": 21
         },
         {
-            "bassString": 3,
-            "beat": 22
-        },
-        {
             "bassString": 2,
             "beat": 23
         },
@@ -103,10 +80,6 @@
         {
             "bassString": 2,
             "beat": 25
-        },
-        {
-            "bassString": 3,
-            "beat": 26
         },
         {
             "bassString": 2,
@@ -124,138 +97,119 @@
             "bassString": 3,
             "beat": 30
         },
-        {
-            "bassString": 2,
-            "beat": 31
-        },
+
+
+
+
         {
             "bassString": 1,
             "beat": 32
         },
         {
-            "bassString": 2,
-            "beat": 33
+            "bassString": 4,
+            "beat": 32
         },
         {
             "bassString": 3,
             "beat": 34
         },
-        {
-            "bassString": 2,
-            "beat": 35
-        },
+
+
+
         {
             "bassString": 1,
             "beat": 36
         },
         {
-            "bassString": 2,
-            "beat": 37
+            "bassString": 4,
+            "beat": 36
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 38
         },
-        {
-            "bassString": 2,
-            "beat": 39
-        },
+
+
         {
             "bassString": 1,
             "beat": 40
         },
         {
-            "bassString": 2,
-            "beat": 41
+            "bassString": 4,
+            "beat": 40
         },
         {
             "bassString": 3,
             "beat": 42
         },
         {
-            "bassString": 2,
-            "beat": 43
-        },
-        {
             "bassString": 1,
             "beat": 44
         },
         {
-            "bassString": 2,
-            "beat": 45
+            "bassString": 4,
+            "beat": 44
         },
+
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 46
-        },
-        {
-            "bassString": 2,
-            "beat": 47
         },
         {
             "bassString": 1,
             "beat": 48
         },
         {
-            "bassString": 2,
-            "beat": 49
+            "bassString": 4,
+            "beat": 48
         },
         {
             "bassString": 3,
             "beat": 50
         },
-        {
-            "bassString": 2,
-            "beat": 51
-        },
+
         {
             "bassString": 1,
             "beat": 52
         },
         {
-            "bassString": 2,
-            "beat": 53
+            "bassString": 4,
+            "beat": 52
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 54
         },
-        {
-            "bassString": 2,
-            "beat": 55
-        },
+
+
         {
             "bassString": 1,
             "beat": 56
         },
         {
-            "bassString": 2,
-            "beat": 57
+            "bassString": 4,
+            "beat": 56
         },
         {
             "bassString": 3,
             "beat": 58
         },
-        {
-            "bassString": 2,
-            "beat": 59
-        },
+
         {
             "bassString": 1,
             "beat": 60
         },
         {
-            "bassString": 2,
-            "beat": 61
+            "bassString": 4,
+            "beat": 60
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 62
         },
-        {
-            "bassString": 2,
-            "beat": 63
-        },
+
+
+        
         {
             "bassString": 1,
             "beat": 64
@@ -265,61 +219,29 @@
             "beat": 65
         },
         {
-            "bassString": 3,
+            "bassString": 4,
             "beat": 66
         },
         {
-            "bassString": 2,
-            "beat": 67
-        },
-        {
-            "bassString": 1,
-            "beat": 68
-        },
-        {
-            "bassString": 2,
-            "beat": 69
-        },
-        {
-            "bassString": 3,
+            "bassString": 4,
             "beat": 70
-        },
-        {
-            "bassString": 2,
-            "beat": 71
         },
         {
             "bassString": 1,
             "beat": 72
         },
-        {
-            "bassString": 2,
-            "beat": 73
-        },
-        {
-            "bassString": 3,
-            "beat": 74
-        },
-        {
-            "bassString": 2,
-            "beat": 75
-        },
+
+        
         {
             "bassString": 1,
             "beat": 76
         },
+
         {
-            "bassString": 2,
-            "beat": 77
-        },
-        {
-            "bassString": 3,
+            "bassString": 1,
             "beat": 78
         },
-        {
-            "bassString": 2,
-            "beat": 79
-        },
+        
         {
             "bassString": 1,
             "beat": 80
@@ -329,25 +251,17 @@
             "beat": 81
         },
         {
-            "bassString": 3,
+            "bassString": 4,
             "beat": 82
         },
+
+        
         {
-            "bassString": 2,
-            "beat": 83
-        },
-        {
-            "bassString": 1,
-            "beat": 84
-        },
-        {
-            "bassString": 2,
-            "beat": 85
-        },
-        {
-            "bassString": 3,
+            "bassString": 4,
             "beat": 86
         },
+
+
         {
             "bassString": 2,
             "beat": 87
@@ -358,451 +272,70 @@
         },
         {
             "bassString": 2,
-            "beat": 89
-        },
-        {
-            "bassString": 3,
             "beat": 90
         },
         {
             "bassString": 2,
-            "beat": 91
-        },
-        {
-            "bassString": 1,
             "beat": 92
         },
         {
             "bassString": 2,
-            "beat": 93
-        },
-        {
-            "bassString": 3,
             "beat": 94
         },
+        
         {
             "bassString": 2,
-            "beat": 95
-        },
-        {
-            "bassString": 1,
             "beat": 96
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 97
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 98
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 99
         },
+
         {
-            "bassString": 1,
+            "bassString": 2,
             "beat": 100
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 101
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 102
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 103
         },
         {
-            "bassString": 1,
+            "bassString": 2,
             "beat": 104
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 105
         },
         {
-            "bassString": 3,
+            "bassString": 2,
             "beat": 106
         },
         {
-            "bassString": 2,
+            "bassString": 1,
             "beat": 107
-        },
+        }
+        ,
         {
-            "bassString": 1,
+            "bassString": 2,
             "beat": 108
-        },
-        {
-            "bassString": 2,
-            "beat": 109
-        },
-        {
-            "bassString": 3,
-            "beat": 110
-        },
-        {
-            "bassString": 2,
-            "beat": 111
-        },
-        {
-            "bassString": 1,
-            "beat": 112
-        },
-        {
-            "bassString": 2,
-            "beat": 113
-        },
-        {
-            "bassString": 3,
-            "beat": 114
-        },
-        {
-            "bassString": 2,
-            "beat": 115
-        },
-        {
-            "bassString": 1,
-            "beat": 116
-        },
-        {
-            "bassString": 2,
-            "beat": 117
-        },
-        {
-            "bassString": 3,
-            "beat": 118
-        },
-        {
-            "bassString": 2,
-            "beat": 119
-        },
-        {
-            "bassString": 1,
-            "beat": 120
-        },
-        {
-            "bassString": 2,
-            "beat": 121
-        },
-        {
-            "bassString": 3,
-            "beat": 122
-        },
-        {
-            "bassString": 2,
-            "beat": 123
-        },
-        {
-            "bassString": 1,
-            "beat": 124
-        },
-        {
-            "bassString": 2,
-            "beat": 125
-        },
-        {
-            "bassString": 3,
-            "beat": 126
-        },
-        {
-            "bassString": 2,
-            "beat": 127
-        },
-        {
-            "bassString": 1,
-            "beat": 128
-        },
-        {
-            "bassString": 2,
-            "beat": 129
-        },
-        {
-            "bassString": 3,
-            "beat": 130
-        },
-        {
-            "bassString": 2,
-            "beat": 131
-        },
-        {
-            "bassString": 1,
-            "beat": 132
-        },
-        {
-            "bassString": 2,
-            "beat": 133
-        },
-        {
-            "bassString": 3,
-            "beat": 134
-        },
-        {
-            "bassString": 2,
-            "beat": 135
-        },
-        {
-            "bassString": 1,
-            "beat": 136
-        },
-        {
-            "bassString": 2,
-            "beat": 137
-        },
-        {
-            "bassString": 3,
-            "beat": 138
-        },
-        {
-            "bassString": 2,
-            "beat": 139
-        },
-        {
-            "bassString": 1,
-            "beat": 140
-        },
-        {
-            "bassString": 2,
-            "beat": 141
-        },
-        {
-            "bassString": 3,
-            "beat": 142
-        },
-        {
-            "bassString": 2,
-            "beat": 143
-        },
-        {
-            "bassString": 1,
-            "beat": 144
-        },
-        {
-            "bassString": 2,
-            "beat": 145
-        },
-        {
-            "bassString": 3,
-            "beat": 146
-        },
-        {
-            "bassString": 2,
-            "beat": 147
-        },
-        {
-            "bassString": 1,
-            "beat": 148
-        },
-        {
-            "bassString": 2,
-            "beat": 149
-        },
-        {
-            "bassString": 3,
-            "beat": 150
-        },
-        {
-            "bassString": 2,
-            "beat": 151
-        },
-        {
-            "bassString": 1,
-            "beat": 152
-        },
-        {
-            "bassString": 2,
-            "beat": 153
-        },
-        {
-            "bassString": 3,
-            "beat": 154
-        },
-        {
-            "bassString": 2,
-            "beat": 155
-        },
-        {
-            "bassString": 1,
-            "beat": 156
-        },
-        {
-            "bassString": 2,
-            "beat": 157
-        },
-        {
-            "bassString": 3,
-            "beat": 158
-        },
-        {
-            "bassString": 2,
-            "beat": 159
-        },
-        {
-            "bassString": 1,
-            "beat": 160
-        },
-        {
-            "bassString": 2,
-            "beat": 161
-        },
-        {
-            "bassString": 3,
-            "beat": 162
-        },
-        {
-            "bassString": 2,
-            "beat": 163
-        },
-        {
-            "bassString": 1,
-            "beat": 164
-        },
-        {
-            "bassString": 2,
-            "beat": 165
-        },
-        {
-            "bassString": 3,
-            "beat": 166
-        },
-        {
-            "bassString": 2,
-            "beat": 167
-        },
-        {
-            "bassString": 1,
-            "beat": 168
-        },
-        {
-            "bassString": 2,
-            "beat": 169
-        },
-        {
-            "bassString": 3,
-            "beat": 170
-        },
-        {
-            "bassString": 2,
-            "beat": 171
-        },
-        {
-            "bassString": 1,
-            "beat": 172
-        },
-        {
-            "bassString": 2,
-            "beat": 173
-        },
-        {
-            "bassString": 3,
-            "beat": 174
-        },
-        {
-            "bassString": 2,
-            "beat": 175
-        },
-        {
-            "bassString": 1,
-            "beat": 176
-        },
-        {
-            "bassString": 2,
-            "beat": 177
-        },
-        {
-            "bassString": 3,
-            "beat": 178
-        },
-        {
-            "bassString": 2,
-            "beat": 179
-        },
-        {
-            "bassString": 1,
-            "beat": 180
-        },
-        {
-            "bassString": 2,
-            "beat": 181
-        },
-        {
-            "bassString": 3,
-            "beat": 182
-        },
-        {
-            "bassString": 2,
-            "beat": 183
-        },
-        {
-            "bassString": 1,
-            "beat": 184
-        },
-        {
-            "bassString": 2,
-            "beat": 185
-        },
-        {
-            "bassString": 3,
-            "beat": 186
-        },
-        {
-            "bassString": 2,
-            "beat": 187
-        },
-        {
-            "bassString": 1,
-            "beat": 188
-        },
-        {
-            "bassString": 2,
-            "beat": 189
-        },
-        {
-            "bassString": 3,
-            "beat": 190
-        },
-        {
-            "bassString": 2,
-            "beat": 191
-        },
-        {
-            "bassString": 1,
-            "beat": 192
-        },
-        {
-            "bassString": 2,
-            "beat": 193
-        },
-        {
-            "bassString": 3,
-            "beat": 194
-        },
-        {
-            "bassString": 2,
-            "beat": 195
-        },
-        {
-            "bassString": 1,
-            "beat": 196
-        },
-        {
-            "bassString": 2,
-            "beat": 197
-        },
-        {
-            "bassString": 3,
-            "beat": 198
-        },
-        {
-            "bassString": 2,
-            "beat": 199
-        },
-        {
-            "bassString": 1,
-            "beat": 200
         }
     ]
 }

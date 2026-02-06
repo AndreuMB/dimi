@@ -3326,9 +3326,6 @@ MonoBehaviour:
   notePrefab: {fileID: 7972822091750203010, guid: 5cb9de7d601890cf9977a831a340b186, type: 3}
   secondsNoteToString: 4
   limit: 520
-  songs:
-  - {fileID: 11400000, guid: 9195b1c919142f6b586e6a0b557c839f, type: 2}
-  - {fileID: 11400000, guid: 4bdc52879cf4bc70ab9b71b5b74f9444, type: 2}
   timerTMP: {fileID: 1954529375}
   triggerString: {fileID: 1669988072}
   scoreTMP: {fileID: 1909031365}
