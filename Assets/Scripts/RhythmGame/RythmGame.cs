@@ -60,56 +60,19 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    Song Song2(Song song)
-    {
-        // Song song = new();
-        // song.bpm = 94;
-
-        // int[] pattern = { 1, 2, 3, 2 };
-
-        // for (int i = 0; i <= 200; i++)
-        // {
-        //     song.notes.Add(new Note2(pattern[i % pattern.Length], i));
-        // }
-        songLoader.LoadSongFromJson(song, "song2.json");
-
-        return song;
-    }
-
     void OnEnable()
     {
         UpdateStringsHint(player.GetComponent<Player>().IsUsingGamepad());
         scoreScreen.SetActive(false);
     }
 
-    // public void StartSong(SongSO song)
-    // {
-    //     StopAllCoroutines();
-    //     Time.timeScale = 1;
-    //     scoreScreen.SetActive(false);
-    //     // scoreScreen.GetComponent<ScoreScreen>().restartEvent.AddListener(StartSong);
-    //     // scoreScreen.GetComponent<ScoreScreen>().restartEvent.Invoke(song);
-    //     timer = 0;
-    //     score = 0;
-    //     scoreTMP.text = score.ToString();
-    //     // currentSong = song;
-    //     noteIndexToPlay = startFromNote < song.notes.Length ? startFromNote : 0;
-    //     noteIndexToSpawn = startFromNote < song.notes.Length ? startFromNote : 0;
-    //     // currentNote = song.notes[noteIndexToPlay];
-    //     EmptyAllStringsNotes();
-    //     timerTMP.text = TimerToMinutes();
-    //     StartCoroutine(StartSongAudio(song));
-    // }
 
     public void StartSong(Song song)
     {
-        song = Song2(song);
+        songLoader.LoadSongFromJson(song, song.jsonFilename + ".json");
         StopAllCoroutines();
         Time.timeScale = 1;
         scoreScreen.SetActive(false);
-        // scoreScreen.GetComponent<ScoreScreen>().restartEvent.AddListener(StartSong);
-        // scoreScreen.GetComponent<ScoreScreen>().restartEvent.Invoke(song);
-        // timer = 0;
         score = 0;
         scoreTMP.text = score.ToString();
         currentSong = song;
@@ -283,8 +246,8 @@ public class RythmGame : MonoBehaviour
         GameObject noteGO = Instantiate(notePrefab, noteSpawnTransform);
         Note note = noteGO.GetComponent<Note>();
         note.triggerStringPosition = triggerString.transform.position;
-        float bpf = currentSong.beatsDelay * currentSong.spb;
-        note.SetSecondsToReachTarget(bpf);
+        float secondsDelay = currentSong.beatsDelay * currentSong.spb;
+        note.SetSecondsToReachTarget(secondsDelay);
         note.SetLimit(limit);
         notesGOList.Add(noteGO);
         note.OnNoteMissed += NextCurrentNote;

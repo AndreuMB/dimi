@@ -228,8 +228,8 @@ public class Player : MonoBehaviour
 		}
 		// yield return new WaitForSeconds(0.5f);
 
-		// rythmMap.GetComponent<RythmGame>().StartSong(interactableSave ? interactableSave.song : defaultSong);
-		rythmMap.GetComponent<RythmGame>().StartSong(defaultSong);
+		rythmMap.GetComponent<RythmGame>().StartSong(interactableSave ? interactableSave.song : defaultSong);
+		// rythmMap.GetComponent<RythmGame>().StartSong(defaultSong);
 
 		// yield return new WaitForSeconds(2);
 		// transition = false;

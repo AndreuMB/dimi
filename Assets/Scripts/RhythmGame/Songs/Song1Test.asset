@@ -12,8 +12,146 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603eb412778fe942587e719d824d505f, type: 3}
   m_Name: Song1Test
   m_EditorClassIdentifier: Assembly-CSharp::Song
-  speed: 4
+  beatsDelay: 4
   bpm: 120
   frequency: 44100
   scoreToPass: 600
-  songFile: {fileID: 8300000, guid: 1edd9fa982389e5dc9fe55c263668e22, type: 3}
+  jsonFilename: song1
+  songFile: {fileID: 8300000, guid: 8263243a6459beba89dbe922a96aad4e, type: 3}
+  notes:
+  - bassString: 1
+    beat: 0
+  - bassString: 2
+    beat: 3
+  - bassString: 1
+    beat: 4
+  - bassString: 2
+    beat: 7
+  - bassString: 1
+    beat: 8
+  - bassString: 3
+    beat: 10
+  - bassString: 1
+    beat: 12
+  - bassString: 1
+    beat: 16
+  - bassString: 3
+    beat: 18
+  - bassString: 2
+    beat: 19
+  - bassString: 3
+    beat: 20
+  - bassString: 1
+    beat: 22
+  - bassString: 3
+    beat: 24
+  - bassString: 2
+    beat: 25
+  - bassString: 1
+    beat: 28
+  - bassString: 3
+    beat: 30
+  - bassString: 2
+    beat: 31
+  - bassString: 3
+    beat: 32
+  - bassString: 1
+    beat: 34
+  - bassString: 3
+    beat: 36
+  - bassString: 2
+    beat: 37
+  - bassString: 1
+    beat: 40
+  - bassString: 4
+    beat: 40
+  - bassString: 3
+    beat: 42
+  - bassString: 1
+    beat: 44
+  - bassString: 4
+    beat: 44
+  - bassString: 2
+    beat: 46
+  - bassString: 1
+    beat: 48
+  - bassString: 4
+    beat: 48
+  - bassString: 3
+    beat: 50
+  - bassString: 1
+    beat: 52
+  - bassString: 4
+    beat: 52
+  - bassString: 2
+    beat: 54
+  - bassString: 1
+    beat: 56
+  - bassString: 4
+    beat: 56
+  - bassString: 3
+    beat: 58
+  - bassString: 1
+    beat: 60
+  - bassString: 4
+    beat: 60
+  - bassString: 2
+    beat: 62
+  - bassString: 1
+    beat: 64
+  - bassString: 2
+    beat: 65
+  - bassString: 4
+    beat: 66
+  - bassString: 4
+    beat: 70
+  - bassString: 1
+    beat: 72
+  - bassString: 1
+    beat: 76
+  - bassString: 1
+    beat: 78
+  - bassString: 1
+    beat: 80
+  - bassString: 2
+    beat: 81
+  - bassString: 4
+    beat: 82
+  - bassString: 4
+    beat: 86
+  - bassString: 2
+    beat: 87
+  - bassString: 1
+    beat: 88
+  - bassString: 2
+    beat: 90
+  - bassString: 2
+    beat: 92
+  - bassString: 2
+    beat: 94
+  - bassString: 2
+    beat: 96
+  - bassString: 1
+    beat: 97
+  - bassString: 2
+    beat: 98
+  - bassString: 1
+    beat: 99
+  - bassString: 2
+    beat: 100
+  - bassString: 1
+    beat: 101
+  - bassString: 2
+    beat: 102
+  - bassString: 1
+    beat: 103
+  - bassString: 2
+    beat: 104
+  - bassString: 1
+    beat: 105
+  - bassString: 2
+    beat: 106
+  - bassString: 1
+    beat: 107
+  - bassString: 2
+    beat: 108

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603eb412778fe942587e719d824d505f, type: 3}
   m_Name: Song2Test
   m_EditorClassIdentifier: Assembly-CSharp::Song
-  speed: 4
+  beatsDelay: 4
   bpm: 94
   frequency: 44100
   scoreToPass: 1500
+  jsonFilename: song2
   songFile: {fileID: 8300000, guid: b703b3ecbfacd7fec82b6c14ed4f4513, type: 3}
-  spb: 0.63829786
+  notes: []

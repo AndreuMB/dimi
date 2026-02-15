@@ -4107,7 +4107,7 @@ MonoBehaviour:
   rythmMap: {fileID: 1309308545}
   headbandRewardGO: {fileID: 1577713628}
   wingsRewardGO: {fileID: 919132147746625031}
-  defaultSong: {fileID: 11400000, guid: e237efba4334d23a3a7660223ff536f4, type: 2}
+  defaultSong: {fileID: 11400000, guid: c9f177bdcc3bf544d94a9a14034d0d2d, type: 2}
 --- !u!95 &1426861728
 Animator:
   serializedVersion: 7

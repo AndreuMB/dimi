@@ -12,6 +12,7 @@ public class Song : ScriptableObject
     public int bpm = 120;
     public int frequency = 44100;
     public int scoreToPass;
+    public string jsonFilename;
     public AudioClip songFile;
 
     [NonSerialized] public float spb;
