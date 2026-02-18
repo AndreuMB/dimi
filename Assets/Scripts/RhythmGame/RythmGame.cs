@@ -39,12 +39,6 @@ public class RythmGame : MonoBehaviour
     [SerializeField] AudioSource songSource;
     [SerializeField] int startFromNote = 0;
     [SerializeField] SongLoader songLoader;
-    // [SerializeField] Song songtest;
-    // bool startingSong;
-    // float spawnTime;
-    // float songStartDSPTime;
-
-
 
 
     void Start()
@@ -106,38 +100,13 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    // IEnumerator StartSongAudio(SongSO song)
-    // {
-    //     songSource.clip = song.songFile;
-    //     float startTime = song.notes[startFromNote].secondToPlay - currentSong.speed;
-    //     StartCoroutine(TimerCountV2());
-
-    //     if (startTime <= 0)
-    //     {
-    //         songSource.time = 0;
-    //         // Math.Abs negative to positive number
-    //         yield return new WaitForSeconds(Math.Abs(startTime));
-    //     }
-    //     else
-    //     {
-    //         songSource.time = startTime;
-    //     }
-
-    //     songSource.Play();
-
-    //     yield return null;
-    // }
-
     async void StartSongAudio(Song song)
     {
         songSource.clip = song.songFile;
-        // int startBeat = song.notes[startFromNote].beatToPlay - currentSong.speed;
         int startTime = song.notes[startFromNote].beat * song.GetFpb() - currentSong.beatsDelay * song.GetFpb();
-        // int startTime = song.notes[startFromNote].beatToPlay - currentSong.speed;
 
-        // StartCoroutine(TimerCount());
-        // BREAKS, INFINITE LOOP!
-        // TimerCount();
+
+
         songSource.timeSamples = startTime;
         StartCoroutine(TimerCount());
         await GenerateFalseBeats();
@@ -164,30 +133,12 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-
-    // IEnumerator TimerCount()
-    // {
-    //     while (songSource.clip.length > songSource.time)
-    //     {
-    //         float timer = songSource.time;
-    //         timerTMP.text = TimerToMinutes(timer);
-    //         NextNote(currentSong.notes[noteIndexToSpawn]);
-    //         yield return null;
-    //     }
-    //     FinishSong();
-    // }
-
     IEnumerator TimerCount()
     {
-        // Song currentSong = Song2();
-        // bool wholeNum = currentBeat % 1 == 0;
-        // if (wholeNum) currentBeat++;
 
         while (songSource.clip.length > songSource.time)
         {
             int currentBeat = GetCurrentBeat(currentSong);
-            // Debug.Log("currentBeat = " + currentBeat);
-            // gameTime = (float)(AudioSettings.dspTime - songStartDSPTime) - currentSong.speed;
             float timer = songSource.time;
             // timer = gameTime;
             timerTMP.text = TimerToMinutes(timer);
@@ -224,20 +175,6 @@ public class RythmGame : MonoBehaviour
         }
     }
 
-    // void NextNote(NoteData currentNoteToSpawn)
-    // {
-    //     if (noteIndexToSpawn < currentSong.notes.Length)
-    //     {
-    //         float secondToSpawn = currentNoteToSpawn.secondToPlay - currentSong.speed;
-
-    //         if (secondToSpawn <= timer)
-    //         {
-    //             SpawnNote(currentNoteToSpawn.stringNum);
-    //             noteIndexToSpawn++;
-    //         }
-    //     }
-
-    // }
 
 
     void SpawnNote(int noteString)
@@ -302,29 +239,33 @@ public class RythmGame : MonoBehaviour
 
     void ScoreSystem(NoteData currentNote, int currentBeat)
     {
-        float accuracy = currentNote.beat - currentBeat;
-        Debug.Log("currentBeat = " + currentBeat);
-        Debug.Log("accuracy = " + accuracy);
+        float currentTime = songSource.time;
+        float noteTime = currentNote.beat * currentSong.spb;
+        float accuracy = Mathf.Abs(noteTime - currentTime);
+
+        // Debug.Log("currentTime = " + currentTime);
+        // Debug.Log("noteTime = " + noteTime);
+        // Debug.Log("accuracy = " + accuracy);
         if (accuracy > 0.6)
         {
             // above 0.6 doesnt destroy note
             Debug.Log("No valid");
             return;
         }
-        else if (accuracy > 0.4)
+        else if (accuracy > 0.3)
         {
             Debug.Log("Meh");
             score += 25;
         }
-        else if (accuracy > 0.3)
+        else if (accuracy > 0.1)
         {
             score += 50;
-            Debug.Log("Nice");
+            Debug.Log("Good");
         }
-        else if (accuracy > 0.15)
+        else if (accuracy > 0.5)
         {
             score += 75;
-            Debug.Log("Good!");
+            Debug.Log("Nice!");
         }
         else
         {
@@ -336,9 +277,6 @@ public class RythmGame : MonoBehaviour
 
         DestroyImmediate(notesGOList[noteIndexToPlay]);
         NextCurrentNote();
-
-        // if (notesGOList.Count > noteIndexToPlay) DestroyImmediate(notesGOList[noteIndexToPlay]);
-        // NextNote();
     }
 
     public void NextCurrentNote()
