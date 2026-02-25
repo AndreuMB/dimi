@@ -88,11 +88,12 @@ public class RythmGame : MonoBehaviour
     {
         foreach (GameObject bassString in noteSpawns)
         {
-            EmptyStringNotes(bassString);
+            Transform bassStringNotesContainer = bassString.transform.GetChild(2);
+            EmptyStringNotes(bassStringNotesContainer);
         }
     }
 
-    void EmptyStringNotes(GameObject bassString)
+    void EmptyStringNotes(Transform bassString)
     {
         foreach (Transform child in bassString.transform)
         {
@@ -180,9 +181,18 @@ public class RythmGame : MonoBehaviour
     void SpawnNote(int noteString)
     {
         Transform noteSpawnTransform = noteSpawns[noteString - 1].transform;
-        GameObject noteGO = Instantiate(notePrefab, noteSpawnTransform);
+        SpawnReferences spawn = noteSpawnTransform.GetComponent<SpawnReferences>();
+
+        Vector3 noteOrigin = spawn.origin.position;
+        Vector3 noteDestination = spawn.destination.position;
+        Transform noteContainer = spawn.noteContainer;
+
+        GameObject noteGO = Instantiate(notePrefab, noteContainer);
         Note note = noteGO.GetComponent<Note>();
-        note.triggerStringPosition = triggerString.transform.position;
+        Image noteImage = noteGO.GetComponent<Image>();
+        noteImage.color = Color.aliceBlue;
+        note.SetNote(noteString, 0, noteOrigin, noteDestination);
+        // note.triggerStringPosition = triggerString.transform.position;
         float secondsDelay = currentSong.beatsDelay * currentSong.spb;
         note.SetSecondsToReachTarget(secondsDelay);
         note.SetLimit(limit);
@@ -195,7 +205,7 @@ public class RythmGame : MonoBehaviour
         if (currentNote == null) return;
 
         int keyNum;
-        bool gamepad = false;
+        // bool gamepad = false;
 
         switch (callbackContext.action.name)
         {
@@ -215,7 +225,7 @@ public class RythmGame : MonoBehaviour
                 return;
         }
 
-        if (callbackContext.control.device is Gamepad) gamepad = true;
+        // if (callbackContext.control.device is Gamepad) gamepad = true;
 
         if (callbackContext.canceled)
         {
@@ -224,7 +234,7 @@ public class RythmGame : MonoBehaviour
 
         if (callbackContext.started)
         {
-            UpdateStringsHint(gamepad);
+            // UpdateStringsHint(gamepad);
             keysList[keyNum - 1].GetComponent<Key>().KeyPress();
 
 

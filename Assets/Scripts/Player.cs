@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 		rythmMap.gameObject.SetActive(false);
 
 		// comment for test
-		RythmGameLoad();
+		// RythmGameLoad();
 	}
 
 	void Update()

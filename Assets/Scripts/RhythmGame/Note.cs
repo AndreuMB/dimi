@@ -13,33 +13,47 @@ public class Note : MonoBehaviour
     float t;
     Vector3 startPosition;
     Vector3 targetPosition;
-    public Vector3 triggerStringPosition;
+    // public Vector3 triggerStringPosition;
     [SerializeField] Color keyDefaultColor;
     [SerializeField] Color keyPressColor;
     [SerializeField] Image insideKeyImg;
     public event Action OnNoteMissed;
 
     public int bassString;
-    public int beat;
+    // public int beat;
     public int beatToPlay;
+    Vector3 origin;
+    Vector3 destination;
 
-    public Note(int bassString, int beat)
+    // public Note(int bassString, int beat, Vector3 origin, Vector3 destination)
+    // {
+    //     this.bassString = bassString;
+    //     // this.beat = beat;
+    //     this.origin = origin;
+    //     this.destination = destination;
+    // }
+
+    public void SetNote(int bassString, int beat, Vector3 origin, Vector3 destination)
     {
         this.bassString = bassString;
-        this.beat = beat;
+        // this.beat = beat;
+        this.origin = origin;
+        this.destination = destination;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        startPosition = transform.position;
-        targetPosition = new(transform.position.x, triggerStringPosition.y);
+        // startPosition = origin;
+        transform.position = origin;
+        // targetPosition = new(transform.position.x, triggerStringPosition.y);
     }
 
     void Update()
     {
+        const float EXTRA_OFFSET = 0.4f;
         t += Time.deltaTime / secondsToReachTarget;
-        transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-        if (transform.position.y <= targetPosition.y)
+        transform.position = Vector3.Lerp(origin, destination, t);
+        if (transform.position.y <= destination.y + EXTRA_OFFSET)
         {
             OnNoteMissed.Invoke();
             Destroy(gameObject);
